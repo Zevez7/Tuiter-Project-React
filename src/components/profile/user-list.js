@@ -1,3 +1,5 @@
+import { faRemove } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -20,7 +22,7 @@ export const UserList = ({ users, deleteUser }) => {
               }}
               className="btn btn-danger fa-pull-right"
             >
-              <i className="fas fa-remove"></i>
+              <FontAwesomeIcon icon={faRemove} />
             </button>
           </Link>
         );
