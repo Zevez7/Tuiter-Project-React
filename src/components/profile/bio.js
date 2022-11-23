@@ -23,11 +23,11 @@ const Bio = () => {
       </Grid>
       <Grid item xs={12} sm={6} sx={{ display: "flex", alignItems: "center" }}>
         <Box>
-          <Box my={2}>
+          <Box mb={1} mt={3}>
             <Stack direction="column">
-              <Typography variant="h7">Software Developer</Typography>
-              <Typography variant="h7">Healthcare</Typography>
-              <Typography variant="h7">Machine Learning</Typography>
+              <Typography variant="h6">Software Developer</Typography>
+              <Typography variant="h6">Healthcare</Typography>
+              <Typography variant="h6">Machine Learning</Typography>
             </Stack>{" "}
             <Typography variant="body2" sx={{ color: "gray" }}>
               Interests
