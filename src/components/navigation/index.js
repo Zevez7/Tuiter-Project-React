@@ -16,19 +16,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Box, Typography } from "@mui/material";
 
 function Navigation() {
-  const { pathname } = useLocation();
+  const {pathname} = useLocation();
   const links = [
-    { label: "Tuiter", icon: faSquare, path: "/tuiter" },
-    { label: "Home", icon: faHouse, path: "/home" },
-    { label: "Explore", icon: faHashtag, path: "/explore" },
-    { label: "Notifications", icon: faBell, path: "/notifications" },
-    { label: "Messages", icon: faEnvelope, path: "/messages" },
-    { label: "Bookmarks", icon: faBookmark, path: "/bookmarks" },
-    { label: "Lists", icon: faList, path: "/lists" },
-    { label: "Profile", icon: faUser, path: "/profile" },
-    { label: "More", icon: faEllipsis, path: "/more" },
-  ];
-  return (
+    {label: 'Tuiter', icon: 'fa-square-t', path: '/tuiter'},
+    {label: 'Home', icon: 'fa-home', path: '/home'},
+    {label: 'Explore', icon: 'fa-hashtag', path: '/explore'},
+    {label: 'Notifications', icon: 'fa-bell', path: '/notifications'},
+    {label: 'Messages', icon: 'fa-envelope', path: '/messages'},
+    {label: 'Bookmarks', icon: 'fa-bookmark', path: '/bookmarks'},
+    {label: 'Lists', icon: 'fa-list', path: '/lists'},
+    {label: 'Profile', icon: 'fa-user', path: '/profile'},
+    {label: 'More', icon: 'fa-circle-ellipsis', path: '/more'},
+  ]
+  return(
     <div className="ttr-navigation">
       <ul className="list-group">
         {links.map((link, ndx) => {
@@ -52,14 +52,10 @@ function Navigation() {
           );
         })}
       </ul>
-      <a
-        href="#"
-        className="mt-3 btn btn-lg btn-primary rounded-pill w-100 fw-bold text-white"
-      >
-        Tuit
-      </a>
+     <a href="#" className="mt-3 btn btn-lg btn-primary rounded-pill w-100 fw-bold text-white">
+      Tuit</a>
     </div>
   );
-}
+};
 
 export default Navigation;

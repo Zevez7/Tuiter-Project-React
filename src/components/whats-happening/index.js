@@ -1,8 +1,6 @@
 /**
  * @file WhatsHappening component
  */
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import whatsHappening from "./whats-happening-data.json";
 import "./whats-happening.css";
@@ -14,12 +12,7 @@ function WhatsHappening() {
   return (
     <div className="ttr-whats-happening p-2">
       <div className="ttr-search position-relative">
-        <FontAwesomeIcon
-          icon={faSearch}
-          className="position-absolute"
-          style={{ top: 17, left: 20 }}
-        />
-        {/* <i className="fas fa-search position-absolute"></i> */}
+        <i className="fas fa-search position-absolute"></i>
         <input
           className="bg-secondary bg-opacity-10 border-0 form-control form-control-lg rounded-pill ps-5"
           placeholder="Search Tuiter"
