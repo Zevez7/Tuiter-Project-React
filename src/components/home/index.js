@@ -1,16 +1,7 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import Tuits from "../tuits";
 import tuitsArray from "../tuits/tuits-data.json";
-import {
-  faImagePortrait,
-  faImage,
-  faFileVideo,
-  faBarChart,
-  faFaceSmile,
-  faCalendar,
-  faMapLocation,
-} from "@fortawesome/free-solid-svg-icons";
+
 const Home = () => {
   return (
     <div className="ttr-home">
@@ -31,14 +22,12 @@ const Home = () => {
             ></textarea>
             <div className="row">
               <div className="col-10 ttr-font-size-150pc text-primary">
-                <FontAwesomeIcon icon={faImagePortrait} className="me-3" />
-                <FontAwesomeIcon icon={faFileVideo} className="me-3" />
-                <FontAwesomeIcon icon={faBarChart} className="me-3" />
-                <FontAwesomeIcon icon={faFaceSmile} className="me-3" />
-                <FontAwesomeIcon icon={faCalendar} className="me-3" />
-                <FontAwesomeIcon icon={faMapLocation} className="me-3" />
-             
-        
+                <i className="fas fa-portrait me-3"></i>
+                <i className="far fa-gif me-3"></i>
+                <i className="far fa-bar-chart me-3"></i>
+                <i className="far fa-face-smile me-3"></i>
+                <i className="far fa-calendar me-3"></i>
+                <i className="far fa-map-location me-3"></i>
               </div>
               <div className="col-2">
                 <a
