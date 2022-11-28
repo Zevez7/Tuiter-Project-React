@@ -3,26 +3,27 @@
  */
 import { Box, Button, TextField, Typography } from "@mui/material";
 import React from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { Controller, useForm } from "react-hook-form";
+import data from "../../dummyData/profileData.json";
 
 /**
  * Ediprofile component to edit user profile
  */
 const Editprofile = () => {
   const navigate = useNavigate();
-
-  const data = {
-    userId: 123455,
-    profileImage:
-      "www.wikipedia.org/portal/wikipedia.org/assets/img/Wikipedia-logo-v2@2x.png",
-    personalWebsite: "www.wikipedia.org",
-    linkedIn: "www.linkedIn.com",
-    github: "www.github.com",
-    instagram: "www.instagram.com",
-    company: "Microsoft",
-    interests: ["Software Developer", "Healthcare", "Machine Learning"],
-    friends: ["12434234", "123123123", "234234234"],
-  };
+  const { handleSubmit, control } = useForm({
+    defaultValues: {
+      personalWebsite: data.personalWebsite,
+      linkedin: data.linkedIn,
+      github: data.github,
+      instagram: data.instagram,
+      company: data.company,
+      interest1: data.interest1,
+      interest2: data.interest2,
+      interest3: data.interest3,
+    },
+  });
 
   /**
    * OnClick cancel button this function is called
@@ -34,97 +35,177 @@ const Editprofile = () => {
   /**
    * OnClick save button this function called
    */
-  const saveBtn = () => {
-    navigate("/profile");
+  const onSubmit = (data) => {
+    console.log(data);
+    return navigate("/profile");
   };
+
   return (
     <Box>
       <Typography variant="h3">Edit Profile</Typography>
-      <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        flexDirection="column"
-      >
-        <Box mt={3} width={350}>
-          <TextField
-            id="outlined"
-            fullWidth
-            label="Personal Website"
-            variant="outlined"
-            defaultValue={data.personalWebsite}
-          />
-        </Box>
+      <form>
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          flexDirection="column"
+        >
+          <Box mt={3} width={350}>
+            <Controller
+              name={"personalWebsite"}
+              control={control}
+              render={({ field: { onChange, value } }) => (
+                <TextField
+                  id="outlined"
+                  fullWidth
+                  label="Personal Website"
+                  variant="outlined"
+                  value={value}
+                  onChange={onChange}
+                />
+              )}
+            />
+          </Box>
 
-        <Box mt={3} width={350}>
-          <TextField
-            id="outlined"
-            fullWidth
-            label="LinkedIn"
-            variant="outlined"
-            defaultValue={data.linkedIn}
-          />
+          <Box mt={3} width={350}>
+            <Controller
+              name={"linkedin"}
+              control={control}
+              render={({ field: { onChange, value } }) => (
+                <TextField
+                  id="outlined"
+                  fullWidth
+                  label="LinkedIn"
+                  variant="outlined"
+                  value={value}
+                  onChange={onChange}
+                />
+              )}
+            />
+          </Box>
+
+          <Box mt={3} width={350}>
+            <Controller
+              name={"github"}
+              control={control}
+              render={({ field: { onChange, value } }) => (
+                <TextField
+                  id="outlined"
+                  fullWidth
+                  label="Github"
+                  variant="outlined"
+                  value={value}
+                  onChange={onChange}
+                />
+              )}
+            />
+          </Box>
+          <Box mt={3} width={350}>
+            <Controller
+              name={"instagram"}
+              control={control}
+              render={({ field: { onChange, value } }) => (
+                <TextField
+                  id="outlined"
+                  fullWidth
+                  label="Instagram"
+                  variant="outlined"
+                  value={value}
+                  onChange={onChange}
+                />
+              )}
+            />
+          </Box>
+          <Box mt={3} width={350}>
+            <Controller
+              name={"company"}
+              control={control}
+              render={({ field: { onChange, value } }) => (
+                <TextField
+                  id="outlined"
+                  fullWidth
+                  label="Company"
+                  variant="outlined"
+                  value={value}
+                  onChange={onChange}
+                />
+              )}
+            />
+          </Box>
+          <Box mt={3} width={350}>
+            <Controller
+              name={"interest1"}
+              control={control}
+              render={({ field: { onChange, value } }) => (
+                <TextField
+                  id="outlined"
+                  fullWidth
+                  label={`interest1`}
+                  variant="outlined"
+                  value={value}
+                  onChange={onChange}
+                />
+              )}
+            />
+          </Box>
+
+          <Box mt={3} width={350}>
+            <Controller
+              name={"interest2"}
+              control={control}
+              render={({ field: { onChange, value } }) => (
+                <TextField
+                  id="outlined"
+                  fullWidth
+                  label={`interest2`}
+                  variant="outlined"
+                  value={value}
+                  onChange={onChange}
+                />
+              )}
+            />
+          </Box>
+          <Box mt={3} width={350}>
+            <Controller
+              name={"interest3"}
+              control={control}
+              render={({ field: { onChange, value } }) => (
+                <TextField
+                  id="outlined"
+                  fullWidth
+                  label={`interest3`}
+                  variant="outlined"
+                  value={value}
+                  onChange={onChange}
+                />
+              )}
+            />
+          </Box>
+          <Box m={4}>
+            <Button
+              sx={{ width: 350 }}
+              variant="contained"
+              component="label"
+              disabled
+            >
+              Upload Profile Image
+              <input hidden accept="image/*" multiple type="file" />
+            </Button>
+          </Box>
         </Box>
-        <Box mt={3} width={350}>
-          <TextField
-            id="outlined"
-            fullWidth
-            label="Github"
-            variant="outlined"
-            defaultValue={data.github}
-          />
-        </Box>
-        <Box mt={3} width={350}>
-          <TextField
-            id="outlined"
-            fullWidth
-            label="Instagram"
-            variant="outlined"
-            defaultValue={data.instagram}
-          />
-        </Box>
-        <Box mt={3} width={350}>
-          <TextField
-            id="outlined"
-            fullWidth
-            label="Company"
-            variant="outlined"
-            defaultValue={data.company}
-          />
-        </Box>
-        {data.interests.map((item, key) => {
-          return (
-            <Box mt={3} width={350}>
-              <TextField
-                id="outlined"
-                fullWidth
-                label={`interest ${key + 1}`}
-                variant="outlined"
-                defaultValue={item}
-              />
-            </Box>
-          );
-        })}
-        <Box m={4}>
+        <Box textAlign="center" mt={4}>
+          <Button variant="outlined" sx={{ ml: 2 }} onClick={cancelBtn}>
+            Cancel
+          </Button>
           <Button
-            sx={{ width: 350 }}
-            variant="contained"
-            component="label"
-            disabled
+            variant="outlined"
+            sx={{ ml: 2 }}
+            onClick={handleSubmit(onSubmit)}
           >
-            Upload Profile Image
-            <input hidden accept="image/*" multiple type="file" />
+            Save
           </Button>
         </Box>
-      </Box>
-      <Box textAlign="center" mt={4}>
-        <Button variant="outlined" sx={{ ml: 2 }} onClick={cancelBtn}>
-          Cancel
-        </Button>
-        <Button variant="outlined" sx={{ ml: 2 }} onClick={saveBtn}>
-          Save
-        </Button>
-      </Box>
+      </form>
     </Box>
   );
 };
