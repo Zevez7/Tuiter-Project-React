@@ -110,34 +110,34 @@ const Bio = (props) => {
           }}
         >
           <Stack direction="row">
-            <Box mx={1}>
+            <Box mx={0}>
               <IconButton
                 size="small"
                 target="_blank"
                 disabled={!props.profile.linkedIn}
                 href={`http://${props.profile.linkedIn}`}
               >
-                <LinkedInIcon sx={{ fontSize: "4em", color: "#0072b1" }} />
+                <LinkedInIcon sx={{ fontSize: "3em", color: "#0072b1" }} />
               </IconButton>
             </Box>
-            <Box mx={1}>
+            <Box mx={0}>
               <IconButton
                 size="small"
                 target="_blank"
                 disabled={!props.profile.github}
                 href={`http://${props.profile.github}`}
               >
-                <GitHubIcon sx={{ fontSize: "4em", color: "#6e5494" }} />
+                <GitHubIcon sx={{ fontSize: "3em", color: "#6e5494" }} />
               </IconButton>
             </Box>
-            <Box mx={1}>
+            <Box mx={0}>
               <IconButton
                 size="small"
                 target="_blank"
                 disabled={!props.profile.instagram}
                 href={`http://${props.profile.instagram}`}
               >
-                <InstagramIcon sx={{ fontSize: "4em", color: "#E1306C" }} />
+                <InstagramIcon sx={{ fontSize: "3em", color: "#E1306C" }} />
               </IconButton>
             </Box>
           </Stack>
