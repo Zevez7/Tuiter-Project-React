@@ -24,6 +24,7 @@ const Editprofile = () => {
       interest1: data.interest1,
       interest2: data.interest2,
       interest3: data.interest3,
+      biography: data.biopgrahy,
     },
   });
 
@@ -176,7 +177,7 @@ const Editprofile = () => {
                 <TextField
                   id="outlined"
                   fullWidth
-                  label={`interest1`}
+                  label={`Interest1`}
                   variant="outlined"
                   value={value}
                   onChange={onChange}
@@ -193,7 +194,7 @@ const Editprofile = () => {
                 <TextField
                   id="outlined"
                   fullWidth
-                  label={`interest2`}
+                  label={`Interest2`}
                   variant="outlined"
                   value={value}
                   onChange={onChange}
@@ -209,10 +210,32 @@ const Editprofile = () => {
                 <TextField
                   id="outlined"
                   fullWidth
-                  label={`interest3`}
+                  label={`Interest3`}
                   variant="outlined"
                   value={value}
                   onChange={onChange}
+                />
+              )}
+            />
+          </Box>
+
+          <Box mt={3} width={350}>
+            <Controller
+              name={"biography"}
+              control={control}
+              render={({ field: { onChange, value } }) => (
+                <TextField
+                  id="outlined"
+                  fullWidth
+                  label={`Biography`}
+                  variant="outlined"
+                  value={value}
+                  onChange={onChange}
+                  multiline
+                  rows={5}
+                  inputProps={{
+                    maxLength: 200,
+                  }}
                 />
               )}
             />

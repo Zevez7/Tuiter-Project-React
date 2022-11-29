@@ -23,8 +23,11 @@ const Placeholder = (
 const Profile = () => {
   const [profileResp, setProfile] = useState({});
   const [userResp, setUser] = useState({});
-  const id = "638455ffaccc421bd3564540";
-  // const id = "63858a9f383a79229b9a7501";
+  // filled id
+  // const id = "638455ffaccc421bd3564540";
+
+  // empty id
+  const id = "63858a9f383a79229b9a7501";
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -50,8 +53,6 @@ const Profile = () => {
     };
     fetchUser();
   }, []);
-  console.log(userResp);
-  console.log(profileResp);
 
   return (
     <Box>

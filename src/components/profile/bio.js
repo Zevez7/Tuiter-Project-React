@@ -164,7 +164,7 @@ const Bio = (props) => {
             </Button>
             <Button
               component={RouterLink}
-              to="editprofile"
+              to={`editprofile/${props.profile.userId}`}
               variant="outlined"
               sx={{ ml: 1 }}
               size="small"
