@@ -3,7 +3,7 @@
  */
 import { Box, Button, TextField, Typography } from "@mui/material";
 import React from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Controller, useForm } from "react-hook-form";
 import data from "../../dummyData/profileData.json";
 
@@ -11,9 +11,6 @@ import data from "../../dummyData/profileData.json";
  * Ediprofile component to edit user profile
  */
 const Editprofile = () => {
-  let { uid } = useParams();
-  console.log("uid", uid);
-
   const navigate = useNavigate();
   const { handleSubmit, control } = useForm({
     defaultValues: {
