@@ -21,6 +21,7 @@ const Placeholder = (
 );
 
 const Profile = () => {
+  const dispatch = useDispatch()
   const [profileResp, setProfile] = useState({});
   const [userResp, setUser] = useState({});
   // filled id
@@ -56,6 +57,7 @@ const Profile = () => {
 
   return (
     <Box>
+    
       {userResp && profileResp ? (
         <Bio profile={profileResp} user={userResp} />
       ) : (

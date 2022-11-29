@@ -2,6 +2,7 @@
  * @file Create axios call function to node server for profile database
  */
 import axios from "axios";
+import { getUserProfile } from "./features/profileSlice";
 // change this to point to your server on Heroku
 
 // const BASE_URL = "https://engineer-software-dat-a3.herokuapp.com";
@@ -21,9 +22,10 @@ export const createProfile = (profile) =>
  * @param {string} uid user id
  * @returns user profile
  */
-export const findProfileByUserId = (uid) =>
-  axios.get(`${PROFILE_URL}/${uid}`).then((response) => response.data);
-
+export const findProfileByUserId = (uid) => async (dispatch) => {
+  const response = await axios.get(`${PROFILE_URL}/${uid}`);
+  dispatch(getUserProfile(response.data));
+};
 /**
  * Update user profile by user id
  * @param {string} uid user id
