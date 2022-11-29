@@ -1,4 +1,5 @@
 import {
+  Avatar,
   Box,
   Button,
   Divider,
@@ -13,7 +14,7 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import { Link as RouterLink } from "react-router-dom";
-
+import puppyimage from "../../image/david-clarke-sVtcRzphxbk-unsplash.jpg";
 const Bio = (props) => {
   console.log(props.profile);
   return (
@@ -21,12 +22,22 @@ const Bio = (props) => {
       <Grid container columnSpacing={1} rowSpacing={3}>
         <Grid item xs={12} sm={6} sx={{ alignItems: "center" }}>
           <Box align="center">
-            <AccountCircleIcon sx={{ fontSize: "9em" }} />
+            {props.profile.profileImage ? (
+              <Avatar
+                alt="Profile Image"
+                src={`http://${props.profile.profileImage}`}
+                sx={{ width: 150, height: 150 }}
+              />
+            ) : (
+              <Avatar src={puppyimage} sx={{ width: 150, height: 150 }} />
+            )}
           </Box>
           <Stack direction="column" align="center">
             <Typography variant="h6">
-              {/* {props.userResp.firstName} Smith */}
+              {props.profile.firstName ? props.profile.firstName : "Your Name"}{" "}
+              {props.profile.lastName ? props.profile.lastName : ""}
             </Typography>
+
             <Typography>{props.user.email && props.user.email}</Typography>
             <Typography>
               {props.profile.personWebsite && (

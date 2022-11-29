@@ -14,6 +14,8 @@ const Editprofile = () => {
   const navigate = useNavigate();
   const { handleSubmit, control } = useForm({
     defaultValues: {
+      firstName: data.firstName,
+      lastName: data.lastName,
       personalWebsite: data.personalWebsite,
       linkedin: data.linkedIn,
       github: data.github,
@@ -50,6 +52,40 @@ const Editprofile = () => {
           alignItems="center"
           flexDirection="column"
         >
+          <Box mt={3} width={350}>
+            <Controller
+              name={"firstName"}
+              control={control}
+              render={({ field: { onChange, value } }) => (
+                <TextField
+                  id="outlined"
+                  fullWidth
+                  label="First Name"
+                  variant="outlined"
+                  value={value}
+                  onChange={onChange}
+                />
+              )}
+            />
+          </Box>
+
+          <Box mt={3} width={350}>
+            <Controller
+              name={"lastName"}
+              control={control}
+              render={({ field: { onChange, value } }) => (
+                <TextField
+                  id="outlined"
+                  fullWidth
+                  label="Last Name"
+                  variant="outlined"
+                  value={value}
+                  onChange={onChange}
+                />
+              )}
+            />
+          </Box>
+
           <Box mt={3} width={350}>
             <Controller
               name={"personalWebsite"}
