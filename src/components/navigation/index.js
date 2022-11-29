@@ -13,6 +13,7 @@ import {
   faEllipsis,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Box, Typography } from "@mui/material";
 
 function Navigation() {
   const {pathname} = useLocation();
