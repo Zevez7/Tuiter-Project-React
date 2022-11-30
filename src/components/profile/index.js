@@ -23,10 +23,10 @@ const Placeholder = (
 const Profile = () => {
   const [profileResp, setProfile] = useState({});
   const [userResp, setUser] = useState({});
-  // filled id
+  // peter parker
   // const id = "638455ffaccc421bd3564540";
 
-  // empty id
+  // clark kent
   const id = "63858a9f383a79229b9a7501";
 
   useEffect(() => {
