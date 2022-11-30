@@ -8,7 +8,7 @@ import { Controller, useForm } from "react-hook-form";
 import data from "../../dummyData/profileData.json";
 
 /**
- * Ediprofile component to edit user profile
+ * Editprofile component to edit user profile
  */
 const Editprofile = () => {
   const navigate = useNavigate();
