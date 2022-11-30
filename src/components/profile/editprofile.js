@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import { Controller, useForm } from "react-hook-form";
 import data from "../../dummyData/profileData.json";
 
+
+
 /**
  * Ediprofile component to edit user profile
  */
