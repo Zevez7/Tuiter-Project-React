@@ -44,9 +44,7 @@ function Navigation() {
                 className="text-decoration-none text-black"
               >
                 <FontAwesomeIcon icon={link.icon} />
-                <span className="ttr-label" style={{ marginLeft: 10 }}>
-                  {link.label}
-                </span>
+                <span className="ttr-label">{link.label}</span>
               </Link>
             </li>
           );

@@ -28,7 +28,7 @@ const Bio = () => {
               <Typography variant="h6">Software Developer</Typography>
               <Typography variant="h6">Healthcare</Typography>
               <Typography variant="h6">Machine Learning</Typography>
-            </Stack>{" "}
+            </Stack>
             <Typography variant="body2" sx={{ color: "gray" }}>
               Interests
             </Typography>
