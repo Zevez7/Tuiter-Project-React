@@ -20,6 +20,9 @@ const Placeholder = (
   </Stack>
 );
 
+/**
+ * Profile component with Bio and Tuit component
+ */
 const Profile = () => {
   const [profileResp, setProfile] = useState({});
   const [userResp, setUser] = useState({});
