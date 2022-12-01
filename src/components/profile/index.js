@@ -56,6 +56,8 @@ const Profile = () => {
 
   return (
     <Box>
+      <Typography variant="h3">Profile</Typography>
+      <Box mt={4} />
       {userResp && profileResp ? (
         <Bio profile={profileResp} user={userResp} />
       ) : (

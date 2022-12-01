@@ -46,6 +46,8 @@ const Editprofile = () => {
   return (
     <Box>
       <Typography variant="h3">Edit Profile</Typography>
+      <Box mt={4} />
+
       <form>
         <Box
           display="flex"
