@@ -18,8 +18,17 @@ export const createProfile = (profile) =>
 
 /**
  * Find the user profile by ID
- * @param {uid} uid user id
+ * @param {string} uid user id
  * @returns user profile
  */
 export const findProfileByUserId = (uid) =>
   axios.get(`${PROFILE_URL}/${uid}`).then((response) => response.data);
+
+/**
+ * Update user profile by user id
+ * @param {string} uid user id
+ * @param {profile} profile profile to update
+ * @returns updated user profile
+ */
+export const updateProfileByUserId = (uid, profile) =>
+  axios.put(`${PROFILE_URL}/${uid}`, profile).then((response) => response.data);
