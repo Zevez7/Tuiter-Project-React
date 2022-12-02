@@ -39,17 +39,13 @@ const Profile = () => {
         setAuthProfile(user);
       } catch (e) {
         console.log("session profile not found, send to login page");
-        // navigate("/profile/login");
+        navigate("/profile/login");
       }
     };
     fetchProfile();
   }, [navigate]);
 
   console.log("authprofile", authprofile);
-
-  const logout = () => {
-    authService.logout().then(() => navigate("/login"));
-  };
 
   useEffect(() => {
     const fetchProfile = async () => {
