@@ -2,31 +2,71 @@
  * @file Edit profile page
  */
 import { Box, Button, TextField, Typography } from "@mui/material";
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useMemo, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { Controller, useForm } from "react-hook-form";
-import data from "../../dummyData/profileData.json";
+import * as serviceProfile from "../../services/profiles-service";
 
 /**
  * Editprofile component to edit user profile
  */
 const Editprofile = () => {
-  const navigate = useNavigate();
-  const { handleSubmit, control } = useForm({
-    defaultValues: {
-      firstName: data.firstName,
-      lastName: data.lastName,
-      personalWebsite: data.personalWebsite,
-      linkedin: data.linkedIn,
-      github: data.github,
-      instagram: data.instagram,
-      company: data.company,
-      interest1: data.interest1,
-      interest2: data.interest2,
-      interest3: data.interest3,
-      biography: data.biopgrahy,
-    },
+  // keeping the forms controlled by adding ""
+  const [profileResp, setProfile] = useState({
+    firstName: "",
+    lastName: "",
+    personalWebsite: "",
+    linkedIn: "",
+    github: "",
+    instagram: "",
+    company: "",
+    interest1: "",
+    interest2: "",
+    interest3: "",
+    biography: "",
   });
+
+  let { uid } = useParams();
+  const navigate = useNavigate();
+  const { handleSubmit, control, reset } = useForm({
+    defaultValues: useMemo(() => {
+      return profileResp;
+    }, [profileResp]),
+  });
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const responseProfile = await serviceProfile.findProfileByUserId(uid);
+
+        const data = await responseProfile[0];
+        // removing extra data and only keeping some
+        const dataFiltered = {
+          firstName: data.firstName,
+          lastName: data.lastName,
+          personalWebsite: data.personalWebsite,
+          linkedIn: data.linkedIn,
+          github: data.github,
+          instagram: data.instagram,
+          company: data.company,
+          interest1: data.interest1,
+          interest2: data.interest2,
+          interest3: data.interest3,
+          biography: data.biography,
+        };
+        setProfile(dataFiltered);
+      } catch (e) {
+        // navigate("/login");
+      }
+    };
+    fetchProfile();
+  }, [uid]);
+
+  useEffect(() => {
+    reset(profileResp);
+  }, [profileResp, reset]);
+
+  console.log("profileResp", profileResp);
 
   /**
    * OnClick cancel button this function is called
@@ -36,10 +76,13 @@ const Editprofile = () => {
   };
 
   /**
-   * OnClick save button this function called
+   * Submit the data to update the profile for the user
+   * @param {object} data the data object to be submitted for update
+   * @returns navigate to the profile page
    */
   const onSubmit = (data) => {
-    console.log(data);
+    console.log("data", data);
+    serviceProfile.updateProfileByUserId(uid, data);
     return navigate("/profile");
   };
 
@@ -106,7 +149,7 @@ const Editprofile = () => {
 
           <Box mt={3} width={350}>
             <Controller
-              name={"linkedin"}
+              name={"linkedIn"}
               control={control}
               render={({ field: { onChange, value } }) => (
                 <TextField
