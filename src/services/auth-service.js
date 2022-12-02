@@ -8,7 +8,6 @@ const api = axios.create({
   withCredentials: true,
 });
 
-//Testing
 export const signup = (user) =>
   api.post(`${AUTH_API}/signup`, user).then((response) => response.data);
 

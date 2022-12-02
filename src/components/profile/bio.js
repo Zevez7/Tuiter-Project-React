@@ -16,7 +16,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import { Link as RouterLink } from "react-router-dom";
 import puppyimage from "../../image/david-clarke-sVtcRzphxbk-unsplash.jpg";
 const Bio = (props) => {
-  console.log(props.profile);
+  // console.log(props.profile);
   return (
     <>
       <Grid container columnSpacing={1} rowSpacing={3}>

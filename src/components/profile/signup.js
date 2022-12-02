@@ -3,43 +3,30 @@ import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import * as authService from "../../services/auth-service";
-import Signup from "./signup";
 
-const Login = () => {
+const Signup = () => {
   const navigate = useNavigate();
-  // const [loginUser, setLoginUser] = useState({});
-
-  // const login = () => {
-  //   console.log(loginUser);
-  //   return authService
-  //     .login(loginUser)
-  //     .then((user) => {
-  //       console.log(user);
-  //       navigate("/profile");
-  //     })
-  //     .catch((e) => alert(e));
-  // };
-  const onSubmit = (data) => {
-    console.log(data);
-
-    authService
-      .login(data)
-      .then((user) => {
-        console.log(user);
-        navigate("/profile");
-      })
-      .catch((e) => console.log(e));
-  };
-
   const { handleSubmit, control } = useForm({
     defaultValues: {
       password: "",
       username: "",
     },
   });
+
+  const onSubmit = (data) => {
+    console.log(data);
+
+    authService
+      .signup(data)
+      .then((user) => {
+        console.log(user);
+        // navigate("/profile");
+      })
+      .catch((e) => console.log(e));
+  };
   return (
     <Box>
-      <Typography variant="h3">Login</Typography>
+      <Typography variant="h3">Signup</Typography>
 
       <form>
         <Box
@@ -55,7 +42,7 @@ const Login = () => {
               control={control}
               render={({ field: { onChange, value } }) => (
                 <TextField
-                  id="username"
+                  id="username1"
                   fullWidth
                   label="Username"
                   variant="outlined"
@@ -72,7 +59,7 @@ const Login = () => {
               control={control}
               render={({ field: { onChange, value } }) => (
                 <TextField
-                  id="password"
+                  id="password1"
                   fullWidth
                   label="Password"
                   type="password"
@@ -90,15 +77,13 @@ const Login = () => {
               sx={{ ml: 2 }}
               onClick={handleSubmit(onSubmit)}
             >
-              Login
+              Signup
             </Button>
           </Box>
         </Box>
       </form>
-
-      <Signup />
     </Box>
   );
 };
 
-export default Login;
+export default Signup;

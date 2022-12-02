@@ -36,7 +36,8 @@ const Profile = () => {
         const user = await authService.profile();
         setAuthProfile(user);
       } catch (e) {
-        navigate("/profile/login");
+        console.log("session profile not found, send to login page");
+        // navigate("/profile/login");
       }
     };
     fetchProfile();
@@ -48,48 +49,48 @@ const Profile = () => {
     authService.logout().then(() => navigate("/login"));
   };
 
-  const [profileResp, setProfile] = useState({});
-  const [userResp, setUser] = useState({});
+  // const [profileResp, setProfile] = useState({});
+  // const [userResp, setUser] = useState({});
   // peter parker
   // const id = "638455ffaccc421bd3564540";
 
   // clark kent
-  const id = "63858a9f383a79229b9a7501";
+  // const id = "63858a9f383a79229b9a7501";
 
-  useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        const responseProfile = await serviceProfile.findProfileByUserId(id);
+  // useEffect(() => {
+  //   const fetchProfile = async () => {
+  //     try {
+  //       const responseProfile = await serviceProfile.findProfileByUserId(id);
 
-        setProfile(responseProfile[0]);
-      } catch (e) {
-        // navigate("/login");
-      }
-    };
-    fetchProfile();
-  }, []);
+  //       setProfile(responseProfile[0]);
+  //     } catch (e) {
+  //       // navigate("/login");
+  //     }
+  //   };
+  //   fetchProfile();
+  // }, []);
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        let responseUser = await serviceUser.findUserById(id);
-        setUser(responseUser);
-      } catch (e) {
-        // navigate("/login");
-      }
-    };
-    fetchUser();
-  }, []);
+  // useEffect(() => {
+  //   const fetchUser = async () => {
+  //     try {
+  //       let responseUser = await serviceUser.findUserById(id);
+  //       setUser(responseUser);
+  //     } catch (e) {
+  //       // navigate("/login");
+  //     }
+  //   };
+  //   fetchUser();
+  // }, []);
 
   return (
     <Box>
       <Typography variant="h3">Profile</Typography>
       <Box mt={4} />
-      {userResp && profileResp ? (
+      {/* {userResp && profileResp ? (
         <Bio profile={profileResp} user={userResp} />
       ) : (
         Placeholder
-      )}
+      )} */}
 
       <Tuits tuits={tuitsArray} />
     </Box>
