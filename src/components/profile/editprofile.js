@@ -6,12 +6,14 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Controller, useForm } from "react-hook-form";
 import * as serviceProfile from "../../services/profiles-service";
+import * as authService from "../../services/auth-service";
 
 /**
  * Editprofile component to edit user profile
  */
 const Editprofile = () => {
   // keeping the forms controlled by adding ""
+  const [authprofile, setAuthProfile] = useState({});
   const [profileResp, setProfile] = useState({
     firstName: "",
     lastName: "",
@@ -26,8 +28,24 @@ const Editprofile = () => {
     biography: "",
   });
 
-  let { uid } = useParams();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchAuthProfile = async () => {
+      try {
+        const user = await authService.profile();
+
+        setAuthProfile(user);
+      } catch (e) {
+        console.log("session profile not found, send to login page");
+        navigate("/profile/login");
+      }
+    };
+    fetchAuthProfile();
+  }, [navigate]);
+
+  console.log(authprofile);
+
   const { handleSubmit, control, reset } = useForm({
     defaultValues: useMemo(() => {
       return profileResp;
@@ -36,8 +54,9 @@ const Editprofile = () => {
 
   useEffect(() => {
     const fetchProfile = async () => {
+      const id = authprofile._id.toString();
       try {
-        const responseProfile = await serviceProfile.findProfileByUserId(uid);
+        const responseProfile = await serviceProfile.findProfileByUserId(id);
 
         const data = await responseProfile[0];
         // removing extra data and only keeping some
@@ -60,7 +79,7 @@ const Editprofile = () => {
       }
     };
     fetchProfile();
-  }, [uid]);
+  }, [authprofile]);
 
   useEffect(() => {
     reset(profileResp);
@@ -82,13 +101,15 @@ const Editprofile = () => {
    */
   const onSubmit = (data) => {
     console.log("data", data);
-    serviceProfile.updateProfileByUserId(uid, data);
+    serviceProfile.updateProfileByUserId(authprofile._id, data);
     return navigate("/profile");
   };
 
   return (
     <Box>
       <Typography variant="h3">Edit Profile</Typography>
+      <Box mt={4} />
+
       <form>
         <Box
           display="flex"
