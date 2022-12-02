@@ -29,7 +29,7 @@ const Placeholder = (
 const Profile = () => {
   const navigate = useNavigate();
   const [authprofile, setAuthProfile] = useState({});
-  const [profile, setProfile] = useState({});
+  const [profileResp, setProfile] = useState({});
   const [userResp, setUser] = useState({});
 
   useEffect(() => {
@@ -67,7 +67,7 @@ const Profile = () => {
     fetchProfile();
   }, [authprofile]);
 
-  console.log("profile", profile);
+  console.log("profileResp", profileResp);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -87,8 +87,8 @@ const Profile = () => {
     <Box>
       <Typography variant="h3">Profile</Typography>
       <Box mt={4} />
-      {userResp && profile ? (
-        <Bio profile={profile} user={userResp} />
+      {userResp && profileResp ? (
+        <Bio profile={profileResp} user={userResp} />
       ) : (
         Placeholder
       )}

@@ -13,10 +13,16 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import InstagramIcon from "@mui/icons-material/Instagram";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import puppyimage from "../../image/david-clarke-sVtcRzphxbk-unsplash.jpg";
+import * as authService from "../../services/auth-service";
+
 const Bio = (props) => {
-  // console.log(props.profile);
+  const navigate = useNavigate();
+
+  const logout = () => {
+    authService.logout().then(() => navigate("/profile/login"));
+  };
   return (
     <>
       <Grid container columnSpacing={1} rowSpacing={3}>
@@ -170,6 +176,15 @@ const Bio = (props) => {
               size="small"
             >
               Edit Profile
+            </Button>
+            <Button
+              variant="outlined"
+              sx={{ ml: 1 }}
+              size="small"
+              color="error"
+              onClick={logout}
+            >
+              LogOut{" "}
             </Button>
           </Box>
         </Grid>
