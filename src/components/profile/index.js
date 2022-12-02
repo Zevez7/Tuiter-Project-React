@@ -29,6 +29,8 @@ const Placeholder = (
 const Profile = () => {
   const navigate = useNavigate();
   const [authprofile, setAuthProfile] = useState({});
+  const [profile, setProfile] = useState({});
+  const [userResp, setUser] = useState({});
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -49,48 +51,47 @@ const Profile = () => {
     authService.logout().then(() => navigate("/login"));
   };
 
-  // const [profileResp, setProfile] = useState({});
-  // const [userResp, setUser] = useState({});
-  // peter parker
-  // const id = "638455ffaccc421bd3564540";
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const id = authprofile._id.toString();
+        console.log("id", id);
+        const responseProfile = await serviceProfile.findProfileByUserId(id);
 
-  // clark kent
-  // const id = "63858a9f383a79229b9a7501";
+        console.log("responseProfile", responseProfile);
+        setProfile(responseProfile[0]);
+      } catch (e) {
+        // navigate("/login");
+      }
+    };
+    fetchProfile();
+  }, [authprofile]);
 
-  // useEffect(() => {
-  //   const fetchProfile = async () => {
-  //     try {
-  //       const responseProfile = await serviceProfile.findProfileByUserId(id);
+  console.log("profile", profile);
 
-  //       setProfile(responseProfile[0]);
-  //     } catch (e) {
-  //       // navigate("/login");
-  //     }
-  //   };
-  //   fetchProfile();
-  // }, []);
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const id = authprofile._id.toString();
 
-  // useEffect(() => {
-  //   const fetchUser = async () => {
-  //     try {
-  //       let responseUser = await serviceUser.findUserById(id);
-  //       setUser(responseUser);
-  //     } catch (e) {
-  //       // navigate("/login");
-  //     }
-  //   };
-  //   fetchUser();
-  // }, []);
+        let responseUser = await serviceUser.findUserById(id);
+        setUser(responseUser);
+      } catch (e) {
+        // navigate("/login");
+      }
+    };
+    fetchUser();
+  }, [authprofile]);
 
   return (
     <Box>
       <Typography variant="h3">Profile</Typography>
       <Box mt={4} />
-      {/* {userResp && profileResp ? (
-        <Bio profile={profileResp} user={userResp} />
+      {userResp && profile ? (
+        <Bio profile={profile} user={userResp} />
       ) : (
         Placeholder
-      )} */}
+      )}
 
       <Tuits tuits={tuitsArray} />
     </Box>
