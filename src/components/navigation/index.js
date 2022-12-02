@@ -16,19 +16,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Box, Typography } from "@mui/material";
 
 function Navigation() {
-  const {pathname} = useLocation();
+  const { pathname } = useLocation();
   const links = [
-    {label: 'Tuiter', icon: 'fa-square-t', path: '/tuiter'},
-    {label: 'Home', icon: 'fa-home', path: '/home'},
-    {label: 'Explore', icon: 'fa-hashtag', path: '/explore'},
-    {label: 'Notifications', icon: 'fa-bell', path: '/notifications'},
-    {label: 'Messages', icon: 'fa-envelope', path: '/messages'},
-    {label: 'Bookmarks', icon: 'fa-bookmark', path: '/bookmarks'},
-    {label: 'Lists', icon: 'fa-list', path: '/lists'},
-    {label: 'Profile', icon: 'fa-user', path: '/profile'},
-    {label: 'More', icon: 'fa-circle-ellipsis', path: '/more'},
+    { label: 'Tuiter', icon: 'fa-square-t', path: '/tuiter' },
+    { label: 'Home', icon: 'fa-home', path: '/home' },
+    { label: 'Explore', icon: 'fa-hashtag', path: '/explore' },
+    { label: 'Notifications', icon: 'fa-bell', path: '/notifications' },
+    { label: 'Messages', icon: 'fa-envelope', path: '/messages' },
+    { label: 'Bookmarks', icon: 'fa-bookmark', path: '/bookmarks' },
+    { label: 'Lists', icon: 'fa-list', path: '/lists' },
+    { label: 'Profile', icon: 'fa-user', path: '/profile' },
+    { label: 'More', icon: 'fa-circle-ellipsis', path: '/more' },
   ]
-  return(
+  return (
     <div className="ttr-navigation">
       <ul className="list-group">
         {links.map((link, ndx) => {
@@ -50,8 +50,8 @@ function Navigation() {
           );
         })}
       </ul>
-     <a href="#" className="mt-3 btn btn-lg btn-primary rounded-pill w-100 fw-bold text-white">
-      Tuit</a>
+      <a href="#" className="mt-3 btn btn-lg btn-primary rounded-pill w-100 fw-bold text-white">
+        Tuit</a>
     </div>
   );
 };
