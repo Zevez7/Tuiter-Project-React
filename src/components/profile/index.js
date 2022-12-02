@@ -4,9 +4,12 @@ import React, { useEffect, useState } from "react";
 import Tuits from "../tuits";
 import tuitsArray from "../tuits/tuits-data.json";
 import Bio from "./bio";
+
+import * as authService from "../../services/auth-service";
 import * as serviceProfile from "../../services/profiles-service";
 import * as serviceUser from "../../services/users-service";
 import Skeleton from "@mui/material/Skeleton";
+import { useNavigate } from "react-router-dom";
 
 const Placeholder = (
   <Stack spacing={1}>
@@ -24,6 +27,27 @@ const Placeholder = (
  * Profile component with Bio and Tuit component
  */
 const Profile = () => {
+  const navigate = useNavigate();
+  const [authprofile, setAuthProfile] = useState({});
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const user = await authService.profile();
+        setAuthProfile(user);
+      } catch (e) {
+        navigate("/profile/login");
+      }
+    };
+    fetchProfile();
+  }, [navigate]);
+
+  console.log("authprofile", authprofile);
+
+  const logout = () => {
+    authService.logout().then(() => navigate("/login"));
+  };
+
   const [profileResp, setProfile] = useState({});
   const [userResp, setUser] = useState({});
   // peter parker
