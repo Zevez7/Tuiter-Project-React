@@ -6,6 +6,7 @@ import tuitsArray from "../tuits/tuits-data.json";
 import Bio from "./bio";
 
 import * as authService from "../../services/auth-service";
+import * as tuitService from "../../services/tuits-service";
 import * as serviceProfile from "../../services/profiles-service";
 import * as serviceUser from "../../services/users-service";
 import Skeleton from "@mui/material/Skeleton";
@@ -31,6 +32,7 @@ const Profile = () => {
   const [authprofile, setAuthProfile] = useState({});
   const [profileResp, setProfile] = useState({});
   const [userResp, setUser] = useState({});
+  const [myTuits, setMyTuits] = useState();
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -50,12 +52,14 @@ const Profile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const id = authprofile._id.toString();
-        console.log("id", id);
-        const responseProfile = await serviceProfile.findProfileByUserId(id);
+        const uid = authprofile._id.toString();
+        console.log("id", uid);
+        const responseProfile = await serviceProfile.findProfileByUserId(uid);
 
-        console.log("responseProfile", responseProfile);
         setProfile(responseProfile[0]);
+
+        const myTuit = await tuitService.findTuitsByUser(uid);
+        setMyTuits(myTuit);
       } catch (e) {
         // navigate("/login");
       }
@@ -64,6 +68,7 @@ const Profile = () => {
   }, [authprofile]);
 
   console.log("profileResp", profileResp);
+  console.log("myTuits", myTuits);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -89,7 +94,7 @@ const Profile = () => {
         Placeholder
       )}
 
-      <Tuits tuits={tuitsArray} />
+      <Tuits tuits={myTuits} />
     </Box>
   );
 };
