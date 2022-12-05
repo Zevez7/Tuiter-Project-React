@@ -1,19 +1,49 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Tuits from "../tuits";
 import tuitsArray from "../tuits/tuits-data.json";
 import { Controller, useForm } from "react-hook-form";
-import { Button, TextField } from "@mui/material";
+import { Button, TextField, Typography } from "@mui/material";
+import * as authService from "../../services/auth-service";
+import * as tuitService from "../../services/tuits-service";
 
 const Home = () => {
-  const { handleSubmit, control } = useForm({
+  const [authprofile, setAuthProfile] = useState({});
+  const [tuits, setTuits] = useState();
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const user = await authService.profile();
+        setAuthProfile(user);
+        const alltuit = await tuitService.findAllTuits();
+        setTuits(alltuit);
+      } catch (e) {
+        // console.log("session profile not found, send to login page");
+        // navigate("/profile/login");
+      }
+    };
+    fetchProfile();
+  }, []);
+
+  const { handleSubmit, control, reset } = useForm({
     defaultValues: {
       tuit: "",
     },
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
+    const uid = authprofile._id;
+
+    const tuitCreated = await tuitService.createTuitByUser(uid, data);
+    console.log(tuitCreated);
+    const alltuit = await tuitService.findAllTuits();
+    setTuits(alltuit);
+    reset();
   };
+
+  console.log(authprofile);
+  console.log(tuits);
 
   return (
     <div className="ttr-home">
@@ -29,8 +59,14 @@ const Home = () => {
           </div>
           <div className="p-2 w-100">
             <form>
+              <Typography variant="body2" sx={{ color: "gray", mb: 1 }}>
+                {authprofile.username
+                  ? `Logged in as ${authprofile.username}`
+                  : `Not logged in`}
+              </Typography>
+
               <Controller
-                name={"username"}
+                name={"tuit"}
                 control={control}
                 render={({ field: { onChange, value } }) => (
                   <TextField
@@ -48,7 +84,7 @@ const Home = () => {
               />
             </form>
             <div className="row">
-              <div className="col-10 ttr-font-size-150pc text-primary">
+              <div className="col-9 ttr-font-size-150pc text-primary">
                 <i className="fas fa-portrait me-3"></i>
                 <i className="far fa-gif me-3"></i>
                 <i className="far fa-bar-chart me-3"></i>
@@ -56,14 +92,21 @@ const Home = () => {
                 <i className="far fa-calendar me-3"></i>
                 <i className="far fa-map-location me-3"></i>
               </div>
-              <div className="col-2">
-                <Button>Tuit</Button>
+              <div className="col-3">
+                <Button
+                  size="large"
+                  variant="contained"
+                  disabled={!authprofile.username}
+                  onClick={handleSubmit(onSubmit)}
+                >
+                  Tuit
+                </Button>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <Tuits tuits={tuitsArray} />
+      <Tuits tuits={tuits} />
     </div>
   );
 };
