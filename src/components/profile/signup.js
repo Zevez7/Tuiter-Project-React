@@ -20,7 +20,7 @@ const Signup = () => {
       .signup(data)
       .then((user) => {
         console.log(user);
-        // navigate("/profile");
+        navigate("/profile");
       })
       .catch((e) => console.log(e));
   };
