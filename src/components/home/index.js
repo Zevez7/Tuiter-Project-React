@@ -1,8 +1,20 @@
 import React from "react";
 import Tuits from "../tuits";
 import tuitsArray from "../tuits/tuits-data.json";
+import { Controller, useForm } from "react-hook-form";
+import { Button, TextField } from "@mui/material";
 
 const Home = () => {
+  const { handleSubmit, control } = useForm({
+    defaultValues: {
+      tuit: "",
+    },
+  });
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
   return (
     <div className="ttr-home">
       <div className="border border-bottom-0">
@@ -16,10 +28,25 @@ const Home = () => {
             />
           </div>
           <div className="p-2 w-100">
-            <textarea
-              placeholder="What's happening?"
-              className="w-100 border-0"
-            ></textarea>
+            <form>
+              <Controller
+                name={"username"}
+                control={control}
+                render={({ field: { onChange, value } }) => (
+                  <TextField
+                    id="tuit"
+                    fullWidth
+                    label="Type your tuit here"
+                    variant="outlined"
+                    value={value}
+                    onChange={onChange}
+                    multiline
+                    rows={4}
+                    sx={{ mb: 1, border: "none" }}
+                  />
+                )}
+              />
+            </form>
             <div className="row">
               <div className="col-10 ttr-font-size-150pc text-primary">
                 <i className="fas fa-portrait me-3"></i>
@@ -30,12 +57,7 @@ const Home = () => {
                 <i className="far fa-map-location me-3"></i>
               </div>
               <div className="col-2">
-                <a
-                  className={`btn btn-primary rounded-pill fa-pull-right
-                                fw-bold ps-4 pe-4`}
-                >
-                  Tuit
-                </a>
+                <Button>Tuit</Button>
               </div>
             </div>
           </div>
