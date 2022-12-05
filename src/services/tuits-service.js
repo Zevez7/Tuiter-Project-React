@@ -7,6 +7,7 @@ import axios from "axios";
 // const BASE_URL = "https://engineer-software-dat-a3.herokuapp.com";
 const BASE_URL = "http://localhost:5000";
 const TUITS_API = `${BASE_URL}/tuits`;
+const USER_API = `${BASE_URL}/users`;
 
 /**
  * Create a new tuit with a tuit
@@ -22,7 +23,9 @@ export const createTuit = (tuit) =>
  * return newly created tuit
  */
 export const createTuitByUser = (uid, tuit) =>
-  axios.post(`${TUITS_API}/${uid}`, tuit).then((response) => response.data);
+  axios
+    .post(`${USER_API}/${uid}/tuits`, tuit)
+    .then((response) => response.data);
 /**
  * Find all tuits
  * return tuit in array
@@ -34,7 +37,7 @@ export const findAllTuits = () =>
  * @param  {string} uid user id
  */
 export const findTuitsByUser = (uid) =>
-  axios.get(`${TUITS_API}/users/${uid}`).then((response) => response.data);
+  axios.get(`${USER_API}/${uid}/tuits`).then((response) => response.data);
 /**
  * Find tuit by tuit id
  * @param  {string} tid tuit id
@@ -55,4 +58,4 @@ export const deleteTuit = (uid) =>
  * return updated tuit
  */
 export const updateTuit = (tid) =>
-  axios.delete(`${TUITS_API}/${tid}`).then((response) => response.data);
+  axios.put(`${TUITS_API}/${tid}`).then((response) => response.data);

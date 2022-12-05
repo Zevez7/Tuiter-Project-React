@@ -1,34 +1,34 @@
 import React from "react";
 import "./navigation.css";
 import { useLocation, Link } from "react-router-dom";
-import {
-  faSquare,
-  faHouse,
-  faHashtag,
-  faBell,
-  faEnvelope,
-  faBookmark,
-  faList,
-  faUser,
-  faEllipsis,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Box, Typography } from "@mui/material";
-
+import CropSquareIcon from "@mui/icons-material/CropSquare";
+import HomeIcon from "@mui/icons-material/Home";
+import ExploreIcon from "@mui/icons-material/Explore";
+import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
+import MailIcon from "@mui/icons-material/Mail";
+import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
+import ListIcon from "@mui/icons-material/List";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 function Navigation() {
-  const {pathname} = useLocation();
+  const { pathname } = useLocation();
   const links = [
-    {label: 'Tuiter', icon: 'fa-square-t', path: '/tuiter'},
-    {label: 'Home', icon: 'fa-home', path: '/home'},
-    {label: 'Explore', icon: 'fa-hashtag', path: '/explore'},
-    {label: 'Notifications', icon: 'fa-bell', path: '/notifications'},
-    {label: 'Messages', icon: 'fa-envelope', path: '/messages'},
-    {label: 'Bookmarks', icon: 'fa-bookmark', path: '/bookmarks'},
-    {label: 'Lists', icon: 'fa-list', path: '/lists'},
-    {label: 'Profile', icon: 'fa-user', path: '/profile'},
-    {label: 'More', icon: 'fa-circle-ellipsis', path: '/more'},
-  ]
-  return(
+    { label: "Tuiter", icon: <CropSquareIcon />, path: "/tuiter" },
+    { label: "Home", icon: <HomeIcon />, path: "/home" },
+    { label: "Explore", icon: <ExploreIcon />, path: "/explore" },
+    {
+      label: "Notifications",
+      icon: <NotificationsActiveIcon />,
+      path: "/notifications",
+    },
+    { label: "Messages", icon: <MailIcon />, path: "/messages" },
+    { label: "Bookmarks", icon: <BookmarkBorderIcon />, path: "/bookmarks" },
+    { label: "Lists", icon: <ListIcon />, path: "/lists" },
+    { label: "Profile", icon: <AccountCircleIcon />, path: "/profile" },
+    { label: "More", icon: <MoreHorizIcon />, path: "/more" },
+  ];
+  return (
     <div className="ttr-navigation">
       <ul className="list-group">
         {links.map((link, ndx) => {
@@ -43,19 +43,21 @@ function Navigation() {
                 id={link.label}
                 className="text-decoration-none text-black"
               >
-                <FontAwesomeIcon icon={link.icon} />
-                <span className="ttr-label" style={{ marginLeft: 10 }}>
-                  {link.label}
-                </span>
+                {link.icon} {""}
+                <span className="ttr-label">{link.label}</span>
               </Link>
             </li>
           );
         })}
       </ul>
-     <a href="#" className="mt-3 btn btn-lg btn-primary rounded-pill w-100 fw-bold text-white">
-      Tuit</a>
+      <a
+        href="#"
+        className="mt-3 btn btn-lg btn-primary rounded-pill w-100 fw-bold text-white"
+      >
+        Tuit
+      </a>
     </div>
   );
-};
+}
 
 export default Navigation;
