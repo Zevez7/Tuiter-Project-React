@@ -21,16 +21,3 @@ useEffect(() => {
   );
 }
 export default Bookmarks;
-
-/*
-
-    {bookmarkedTuits.map((tuits, index) => (
-    index%2===0
-      ? (<div class="row">
-      <div class="col-6" ><Bookmark key={'bookmark-'+index} bookmarkTuit={bookmarkedTuits[index]} /></div>
-      {index+1<tuitsArray.length?<div class="col-6" ><Bookmark key={'bookmark-'+index+1} bookmarkTuit={bookmarkedTuits[index+1]} /></div>:null}
-         </div>)
-      : <> <br /> </>
-  ))}
-
-*/

@@ -13,6 +13,7 @@ import Lists from "../lists";
 import More from "../more";
 import Editprofile from "../profile/editprofile";
 import Likedhistory from "../profile/likehistory";
+import Login from "../profile/login";
 
 function Tuiter() {
   return (
@@ -33,8 +34,14 @@ function Tuiter() {
               <Route path="/bookmarks" element={<Bookmarks />} />
               <Route path="/lists" element={<Lists />} />
               <Route path="/profile" element={<Profile />} />
-              <Route path="/profile/editprofile" element={<Editprofile />} />
+              <Route
+                path="/profile/editprofile/:uid"
+                element={<Editprofile />}
+              />
               <Route path="/profile/likedhistory" element={<Likedhistory />} />
+              <Route path="/more" element={<More />} />
+
+              <Route path="/profile/login" element={<Login />} />
               <Route path="/more" element={<More />} />
             </Routes>
           </div>
