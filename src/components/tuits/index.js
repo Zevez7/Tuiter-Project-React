@@ -13,7 +13,7 @@ const Tuits = ({ tuits = [] }) => {
   return (
     <div>
       <ul className="ttr-tuits list-group">
-        {tuits.map && tuits.map((tuit) => <Tuit key={tuit._id} tuit={tuit} />)}
+        {tuits.map && tuits.map((tuit,index) => <Tuit key={'tuit-'+index} tuit={tuit} />)}
       </ul>
     </div>
   );
