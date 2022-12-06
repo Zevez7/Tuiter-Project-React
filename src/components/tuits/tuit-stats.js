@@ -1,6 +1,7 @@
 import React, {useState,useEffect} from "react";
 import Bookmark from "../bookmarks/bookmark";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import * as LikeService from '../../services/likes-service';
 const TuitStats = ({ tuit, bookmarkTuit = () => {}, currentUser, index, deleteBookmark }) => {
   let likeValueDisplayLogic;
 
@@ -13,15 +14,49 @@ const TuitStats = ({ tuit, bookmarkTuit = () => {}, currentUser, index, deleteBo
   }
 
   const [isTuitLiked, setIsTuitLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(100);
+
+
+  const likeTheTuit = async ()=>{
+    const result= await LikeService.createLike(currentUser._id,tuit._id);
+    console.log('after like creation: '+JSON.stringify(result));
+   }
+
+
+  const deleteTheTuit = async ()=>{
+    const result= await LikeService.deleteLike(currentUser._id,tuit._id);
+    console.log('after delete creation: '+JSON.stringify(result));
+
+   }
 
   const likeTuit = () => {
 
-    setIsTuitLiked(!isTuitLiked);
+  if(!isTuitLiked){
+    likeTheTuit();
+    setIsTuitLiked(true);
+  }else {
+    deleteTheTuit()
+    setIsTuitLiked(false);
+  }
+  
   }
 
   useEffect(() => {
-    
 
+   const findLikeCountAndIsTuitLiked = async () =>{
+
+    const likedData= await LikeService.findUsersThatLikeTheTuitByTuidId(tuit._id);
+    console.log('likedData: '+JSON.stringify(likedData));
+    setLikeCount(likedData.length);
+    for(let i=0;i<likedData.length;i++){
+      if(likedData[i].likedBy._id===currentUser._id){
+        setIsTuitLiked(true);
+        break;
+      }
+    }
+    }
+
+    findLikeCountAndIsTuitLiked();
   }, [])
 
 
@@ -43,7 +78,7 @@ const TuitStats = ({ tuit, bookmarkTuit = () => {}, currentUser, index, deleteBo
 }
 {!isTuitLiked&&<div className="col">
       <i className='fa fa-heart' onClick={()=>likeTuit()}></i>
-        {tuit.stats && tuit.stats.retuits}
+        {likeCount}
       </div>
 }
       <div className="col">
