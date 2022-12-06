@@ -25,6 +25,18 @@ const Home = () => {
     fetchProfile();
   }, []);
 
+  const fetchAllTuits = async () => {
+    try {
+      const alltuit = await tuitService.findAllTuits();
+      setTuits(alltuit);
+    } catch (e) {
+      // navigate("/profile/login");
+    }
+  };
+  useEffect(() => {
+    fetchAllTuits();
+  }, []);
+
   const { handleSubmit, control, reset } = useForm({
     defaultValues: {
       tuit: "",
