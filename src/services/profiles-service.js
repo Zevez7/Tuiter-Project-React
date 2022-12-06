@@ -32,3 +32,11 @@ export const findProfileByUserId = (uid) =>
  */
 export const updateProfileByUserId = (uid, profile) =>
   axios.put(`${PROFILE_URL}/${uid}`, profile).then((response) => response.data);
+
+/**
+ * delete user profile by user id
+ * @param {string} uid user id
+ * @returns delete profile status
+ */
+export const deleteProfileByUserId = (uid) =>
+  axios.delete(`${PROFILE_URL}/${uid}`).then((response) => response.data);

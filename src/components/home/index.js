@@ -54,8 +54,8 @@ const Home = () => {
     reset();
   };
 
-  console.log(authprofile);
-  console.log(tuits);
+  // console.log(authprofile);
+  // console.log(tuits);
 
   return (
     <div className="ttr-home">
