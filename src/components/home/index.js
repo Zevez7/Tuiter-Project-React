@@ -32,8 +32,11 @@ if(searchQuery!==null && searchQuery.length>0 ){
             tempTuits.push(alltuit[i]);
           }
         }
-      }
         setTuits(tempTuits);
+      } else {
+        setTuits(alltuit);
+      }
+        
       } catch (e) {
          console.log("session profile not found, send to login page");
          navigate("/profile/login");
