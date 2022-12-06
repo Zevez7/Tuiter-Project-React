@@ -1,7 +1,7 @@
 import React from "react";
 import Bookmark from "../bookmarks/bookmark";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-const TuitStats = ({ tuit, likeTuit = () => {}, bookmarkTuit = () => {} }) => {
+const TuitStats = ({ tuit, likeTuit = () => {}, bookmarkTuit = () => {}, currentUser, index, deleteBookmark }) => {
   let likeValueDisplayLogic;
 
   if (tuit.stats && tuit.stats.likes) {
@@ -11,6 +11,7 @@ const TuitStats = ({ tuit, likeTuit = () => {}, bookmarkTuit = () => {} }) => {
   } else if (tuit.stats && tuit.stats.likes <= 0) {
     likeValueDisplayLogic = <FavoriteIcon sx={{ color: "gray" }} />;
   }
+
 
   return (
     <div className="row mt-2">
@@ -33,7 +34,7 @@ const TuitStats = ({ tuit, likeTuit = () => {}, bookmarkTuit = () => {} }) => {
       <div className="col">
         <i className="far fa-inbox-out"></i>
       </div>
-      <div className="col">{Bookmark(tuit)}</div>
+      <div className="col">{Bookmark(tuit,currentUser,index,deleteBookmark)}</div>
     </div>
   );
 };

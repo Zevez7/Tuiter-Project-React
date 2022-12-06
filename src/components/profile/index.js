@@ -34,7 +34,7 @@ const Profile = () => {
   const [userResp, setUser] = useState({});
   const [myTuits, setMyTuits] = useState();
 
-  useEffect(() => {
+  useEffect(() => { 
     const fetchProfile = async () => {
       try {
         const user = await authService.profile();
