@@ -1,21 +1,32 @@
 /**
  * @file WhatsHappening component
  */
-import React from "react";
+import React, {useState} from "react";
 import whatsHappening from "./whats-happening-data.json";
 import "./whats-happening.css";
+import { useNavigate } from "react-router-dom";
 
 /**
  * WhatsHappening react component
  */
 function WhatsHappening() {
+  
+const navigate = useNavigate();
+const [searchQuery,setSearchQuery]= useState('');
+
+  const searchTuits =()=>{
+    navigate("/home?q="+searchQuery);
+  }
   return (
+    
     <div className="ttr-whats-happening p-2">
+      {JSON.stringify(searchQuery)}
       <div className="ttr-search position-relative">
-        <i className="fas fa-search position-absolute"></i>
-        <input
+        <i className="fas fa-search position-absolute" onClick={()=> searchTuits()}></i>
+        <input 
           className="bg-secondary bg-opacity-10 border-0 form-control form-control-lg rounded-pill ps-5"
           placeholder="Search Tuiter"
+         onChange={(e)=>setSearchQuery(e.target.value)}
         />
       </div>
       <div className="bg-secondary bg-opacity-10 ttr-rounded-15px mt-2 p-2">
