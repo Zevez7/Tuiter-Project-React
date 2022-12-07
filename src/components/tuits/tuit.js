@@ -1,9 +1,10 @@
-import React from "react";
+import React, {useState} from "react";
 import TuitStats from "./tuit-stats";
 import TuitImage from "./tuit-image";
 import TuitVideo from "./tuit-video";
 import { useNavigate, Link } from "react-router-dom";
 import { Avatar } from "@mui/material";
+import { AddCommentSharp } from "@mui/icons-material";
 
 const Tuit = ({ tuit, likeTuit, bookmarkTuit, currentUser,index, deleteBookmark }) => {
   const daysOld = (tuit) => {
@@ -28,6 +29,29 @@ const Tuit = ({ tuit, likeTuit, bookmarkTuit, currentUser,index, deleteBookmark 
     }
     return old;
   };
+
+  const [showCommentSection,setCommentSection]= useState(false);
+  const [commentCount,setcommentCount]= useState(100);
+  const [commentText,setCommentText]= useState('dummy comment');
+  const [comments,setComments] = useState([{
+    commentedBy: {username: 'dummy username'},
+    commentedTuit: 'dummy tuit',
+    comment: 'dummy text'
+   }]);
+  const displayComment = () =>{
+    setCommentSection(!showCommentSection);
+  }
+
+  const addComment =() =>{
+   const comment={
+    commentedBy: currentUser.currentUser,
+    commentedTuit: tuit,
+    comment: commentText
+   };
+    setComments.push(comment);
+    setcommentCount((prevCount)=>prevCount+1);
+
+  }
   return (
     // <li onClick={() => navigate(`/tuit/${tuit._id}`)}
     <li className="p-2 ttr-tuit list-group-item d-flex rounded-0">
@@ -56,7 +80,23 @@ const Tuit = ({ tuit, likeTuit, bookmarkTuit, currentUser,index, deleteBookmark 
           bookmarkTuit={bookmarkTuit}
           index={index}
           deleteBookmark={deleteBookmark}
+          displayComment={displayComment}
+          commentCount={commentCount}
         />
+      {showCommentSection &&  <div className="card">
+   <div className="card-body">
+   {comments.map && comments.map((comment,index) => <>
+    <div className="card">
+   <div class="card-body">
+   <p>{comment.commentedBy.username}: {comment.comment} </p>
+  </div>
+  </div>
+  <br />
+  </>)}
+    <textarea className="form-control" id="exampleFormControlTextarea1" rows="2" placeholder='Enter your comment' onChange={(e)=>setCommentText(e.target.value)}></textarea>
+    <button type="button" className="btn btn-primary" style={{float:'right'}} onClick={()=>addComment()}>Comment</button>
+  </div>
+</div>}
       </div>
     </li>
   );

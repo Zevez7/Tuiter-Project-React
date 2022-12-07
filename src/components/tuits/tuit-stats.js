@@ -2,7 +2,7 @@ import React, {useState,useEffect} from "react";
 import Bookmark from "../bookmarks/bookmark";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import * as LikeService from '../../services/likes-service';
-const TuitStats = ({ tuit, bookmarkTuit = () => {}, currentUser, index, deleteBookmark }) => {
+const TuitStats = ({ tuit, bookmarkTuit = () => {}, currentUser, index, deleteBookmark, displayComment, commentCount }) => {
   let likeValueDisplayLogic;
 
   if (tuit.stats && tuit.stats.likes) {
@@ -65,8 +65,8 @@ const TuitStats = ({ tuit, bookmarkTuit = () => {}, currentUser, index, deleteBo
     <div className="row mt-2">
 
       <div className="col">
-        <i className="far fa-message me-1"></i>
-        {tuit.stats && tuit.stats.replies}
+        <i className="far fa-message me-1" onClick={()=>displayComment()}></i>
+        {commentCount}
       </div>
       <div className="col">
         <i className="far fa-retweet me-1"></i>
