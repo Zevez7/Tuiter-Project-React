@@ -5,6 +5,7 @@ import TuitVideo from "./tuit-video";
 import { useNavigate, Link } from "react-router-dom";
 import { Avatar } from "@mui/material";
 import { AddCommentSharp } from "@mui/icons-material";
+import * as CommentService from '../../services/comment-service';
 
 const Tuit = ({ tuit, likeTuit, bookmarkTuit, currentUser,index, deleteBookmark }) => {
   const daysOld = (tuit) => {
@@ -44,12 +45,21 @@ const Tuit = ({ tuit, likeTuit, bookmarkTuit, currentUser,index, deleteBookmark 
 
   const addComment =() =>{
    const comment={
-    commentedBy: currentUser.currentUser,
+    commentedBy: currentUser,
     commentedTuit: tuit,
     comment: commentText
    };
-    setComments.push(comment);
+   setComments((prevComments)=>[comment,...prevComments]);
     setcommentCount((prevCount)=>prevCount+1);
+
+const saveComment = async ()=> {
+  const tempComment = {commentedBy: currentUser._id,commentedTuit: tuit._id,comment:commentText };
+  console.log('tempComment to be inserted: '+JSON.stringify(tempComment));
+  const commentResult= await CommentService.createComment(tempComment);
+  console.log('commentResult: '+JSON.stringify(commentResult));
+}
+
+ saveComment()
 
   }
   return (
@@ -86,8 +96,8 @@ const Tuit = ({ tuit, likeTuit, bookmarkTuit, currentUser,index, deleteBookmark 
       {showCommentSection &&  <div className="card">
    <div className="card-body">
    {comments.map && comments.map((comment,index) => <>
-    <div className="card">
-   <div class="card-body">
+    <div className="card" key={'comment:'+index}>
+   <div className="card-body">
    <p>{comment.commentedBy.username}: {comment.comment} </p>
   </div>
   </div>
