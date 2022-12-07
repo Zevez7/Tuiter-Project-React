@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import TuitStats from "./tuit-stats";
 import TuitImage from "./tuit-image";
 import TuitVideo from "./tuit-video";
@@ -54,14 +54,24 @@ const Tuit = ({ tuit, likeTuit, bookmarkTuit, currentUser,index, deleteBookmark 
 
 const saveComment = async ()=> {
   const tempComment = {commentedBy: currentUser._id,commentedTuit: tuit._id,comment:commentText };
-  console.log('tempComment to be inserted: '+JSON.stringify(tempComment));
   const commentResult= await CommentService.createComment(tempComment);
-  console.log('commentResult: '+JSON.stringify(commentResult));
 }
-
- saveComment()
-
+ saveComment();
   }
+
+useEffect(()=>{
+
+  const getCommentsForTheTuit= async () =>{
+
+    const commentResult= await CommentService.findUsersThatCommentTheTuitByTuidId(tuit._id);
+    setcommentCount(commentResult.length);
+    setComments(commentResult);
+  }
+  getCommentsForTheTuit();
+
+
+},[]);
+
   return (
     // <li onClick={() => navigate(`/tuit/${tuit._id}`)}
     <li className="p-2 ttr-tuit list-group-item d-flex rounded-0">
