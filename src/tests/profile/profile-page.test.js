@@ -7,7 +7,6 @@ import { HashRouter } from "react-router-dom";
 import axios from "axios";
 import Bio from "../../components/profile/bio";
 import { findProfileByUserId } from "../../services/profiles-service";
-import { findUserById } from "../../services/users-service";
 
 /**
  * Jest mock axios
@@ -27,7 +26,7 @@ const MOCKED_PROFILE = {
   company: "Microsoft",
   interest1: "Software Developer",
   interest2: "Healthcare",
-  interest3: "Machine Learning12",
+  interest3: "Machine Learning",
   friends: ["634079953704de375bfca834", "634079953704de375bfca834"],
 };
 
@@ -36,30 +35,14 @@ const MOCKED_USER = {
   password: "Smith",
   email: "Spiderman@web.com",
 };
-//   {
-//     _id: "638ebd67c7aefa0f6ae16df3",
-//     userId: "638ebd67c7aefa0f6ae16df1",
-//     profileImage:
-//       "https://commons.wikimedia.org/wiki/Main_Page#/media/File:Preparing_and_slicing_carrots.jpg",
-//     personalWebiste: "www.airbnb.org",
-//     linkedIn: "www.linkedIn.com",
-//     github: "www.github.com",
-//     instagram: "www.instagram.com",
-//     company: "Microsoft",
-//     interest1: "Sleeping",
-//     interest2: "Running",
-//     interest3: "Learning",
-//     friends: ["634079953704de375bfca834", "634079953704de375bfca834"],
-//   },
-// ];
 
 /**
- * Test list render with static user array
- * @param  {string} "userlistrendersstaticuserarray" name of the test
+ * Test bio componenet with mocked profile and mocked user data
+ * @param  {string} name of the test
  * @param  {function} function to be called
  */
 
-test("profile render static profile", () => {
+test("profile render static", () => {
   render(
     <HashRouter>
       <Bio profile={MOCKED_PROFILE} user={MOCKED_USER} />
@@ -91,9 +74,9 @@ test("mocked api response", async () => {
       <Bio profile={profile} user={user} />
     </HashRouter>
   );
+  const emailScreen = screen.getByText(/Spiderman@web.com/i);
+  expect(emailScreen).toBeInTheDocument();
 
-  
+  const instagramScreen = screen.getByText(/Healthcare/i);
+  expect(instagramScreen).toBeInTheDocument();
 });
-// Tested this in the user-list-no-mock.test.js
-// test("user list renders async", async () => {
-// });
