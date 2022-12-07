@@ -1,12 +1,6 @@
 /**
  * @file User Test
  */
-import {
-  createUser,
-  deleteUsersByUsername,
-  findAllUsers,
-  findUserById,
-} from "../../services/users-service";
 
 import {
   createProfile,

@@ -41,7 +41,7 @@ describe("profile renders asyn", () => {
   };
 
   /**
-   * Test to render Bio componenet with data from server
+   * Test to render Bio component with data from server
    * @param  {string} name of the test
    * @param  {function} function to be called
    */
