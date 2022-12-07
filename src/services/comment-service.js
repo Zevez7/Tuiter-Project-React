@@ -7,6 +7,7 @@ import axios from "axios";
 // const BASE_URL = "https://engineer-software-dat-a3.herokuapp.com";
 const BASE_URL = "http://localhost:5002";
 const USER_API = `${BASE_URL}/users`;
+const COMMENT_API = `${BASE_URL}/comments`;
 const TUIT_API = `${BASE_URL}/tuits`;
 
 /**
@@ -14,8 +15,8 @@ const TUIT_API = `${BASE_URL}/tuits`;
  * @param {tuit} tuit tuit to be created
  * @returns newly created tuit
  */
-export const createComment = (uid,tid) =>
-  axios.post(`${USER_API}/${uid}/comments/${tid}`).then((response) => response.data);
+export const createComment = (comment) =>
+  axios.post(`${COMMENT_API}`, comment).then((response) => response.data);
 /**
  * Find users that like the tuit by id
  * @param  {string} uid user id
