@@ -38,6 +38,14 @@ export const findAllTuits = () =>
  */
 export const findTuitsByUser = (uid) =>
   axios.get(`${USER_API}/${uid}/tuits`).then((response) => response.data);
+
+/**
+ * Find tuits by user id
+ * @param  {string} uid user id
+ */
+export const findTuitsLikedByAUser = (uid) =>
+    axios.get(`${USER_API}/${uid}/likes`).then((response) => response.data);
+
 /**
  * Find tuit by tuit id
  * @param  {string} tid tuit id

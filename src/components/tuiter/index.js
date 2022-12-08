@@ -14,6 +14,7 @@ import More from "../more";
 import Editprofile from "../profile/editprofile";
 import Likedhistory from "../profile/likehistory";
 import Login from "../profile/login";
+import Likes from "../likes";
 
 function Tuiter() {
   return (
@@ -32,6 +33,7 @@ function Tuiter() {
               <Route path="/notifications" element={<Notifications />} />
               <Route path="/messages" element={<Messages />} />
               <Route path="/bookmarks" element={<Bookmarks />} />
+              <Route path="/likes" element={<Likes />} />
               <Route path="/lists" element={<Lists />} />
               <Route path="/profile" element={<Profile />} />
               <Route
