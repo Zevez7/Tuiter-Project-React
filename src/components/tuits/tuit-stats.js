@@ -1,6 +1,7 @@
 import React from "react";
 import Bookmark from "../bookmarks/bookmark";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import Like from "../likes/like";
 const TuitStats = ({ tuit, likeTuit = () => {}, bookmarkTuit = () => {} }) => {
   let likeValueDisplayLogic;
 
@@ -22,13 +23,7 @@ const TuitStats = ({ tuit, likeTuit = () => {}, bookmarkTuit = () => {} }) => {
         <i className="far fa-retweet me-1"></i>
         {tuit.stats && tuit.stats.retuits}
       </div>
-      <div className="col">
-        <span onClick={() => likeTuit(tuit)}>
-          {likeValueDisplayLogic}
-          {""}
-
-          {tuit.stats && tuit.stats.likes}
-        </span>
+      <div className="col">{Like(tuit)}
       </div>
       <div className="col">
         <i className="far fa-inbox-out"></i>
