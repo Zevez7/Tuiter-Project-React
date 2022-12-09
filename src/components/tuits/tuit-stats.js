@@ -2,7 +2,7 @@ import React, {useState,useEffect} from "react";
 import Bookmark from "../bookmarks/bookmark";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import * as LikeService from '../../services/likes-service';
-const TuitStats = ({ tuit, bookmarkTuit = () => {}, currentUser, index, deleteBookmark }) => {
+const TuitStats = ({ tuit, bookmarkTuit = () => {}, currentUser, index, deleteBookmark, displayComment, commentCount }) => {
   let likeValueDisplayLogic;
 
   if (tuit.stats && tuit.stats.likes) {
@@ -14,7 +14,7 @@ const TuitStats = ({ tuit, bookmarkTuit = () => {}, currentUser, index, deleteBo
   }
 
   const [isTuitLiked, setIsTuitLiked] = useState(false);
-  const [likeCount, setLikeCount] = useState(100);
+  const [likeCount, setLikeCount] = useState(0);
 
 
   const likeTheTuit = async ()=>{
@@ -34,9 +34,11 @@ const TuitStats = ({ tuit, bookmarkTuit = () => {}, currentUser, index, deleteBo
   if(!isTuitLiked){
     likeTheTuit();
     setIsTuitLiked(true);
+    setLikeCount((prevCount)=>prevCount+1);
   }else {
     deleteTheTuit()
     setIsTuitLiked(false);
+    setLikeCount((prevCount)=>prevCount-1);
   }
   
   }
@@ -46,7 +48,6 @@ const TuitStats = ({ tuit, bookmarkTuit = () => {}, currentUser, index, deleteBo
    const findLikeCountAndIsTuitLiked = async () =>{
 
     const likedData= await LikeService.findUsersThatLikeTheTuitByTuidId(tuit._id);
-    console.log('likedData: '+JSON.stringify(likedData));
     setLikeCount(likedData.length);
     for(let i=0;i<likedData.length;i++){
       if(likedData[i].likedBy._id===currentUser._id){
@@ -62,9 +63,10 @@ const TuitStats = ({ tuit, bookmarkTuit = () => {}, currentUser, index, deleteBo
 
   return (
     <div className="row mt-2">
+
       <div className="col">
-        <i className="far fa-message me-1"></i>
-        {tuit.stats && tuit.stats.replies}
+        <i className="far fa-message me-1" onClick={()=>displayComment()}></i>
+        {commentCount}
       </div>
       <div className="col">
         <i className="far fa-retweet me-1"></i>
@@ -73,12 +75,12 @@ const TuitStats = ({ tuit, bookmarkTuit = () => {}, currentUser, index, deleteBo
       {isTuitLiked&& 
       <div className="col">
       <i className='fa fa-heart ' style={{color:'red'}} onClick={()=>likeTuit()} ></i>
-        {tuit.stats && tuit.stats.retuits}
+      {likeCount}
       </div>
 }
 {!isTuitLiked&&<div className="col">
       <i className='fa fa-heart' onClick={()=>likeTuit()}></i>
-        {likeCount}
+      {likeCount}
       </div>
 }
       <div className="col">
