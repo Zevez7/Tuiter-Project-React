@@ -1,7 +1,7 @@
 import axios from "axios";
 // const BASE_URL = process.env.REACT_APP_BASE_URL;
 // const BASE_URL = "https://engineer-software-dat-a4.herokuapp.com";
-const BASE_URL = "http://localhost:5002";
+const BASE_URL = "http://localhost:5000";
 
 const AUTH_API = `${BASE_URL}/api/auth`;
 const api = axios.create({
