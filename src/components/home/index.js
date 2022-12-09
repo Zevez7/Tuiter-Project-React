@@ -74,9 +74,6 @@ if(searchQuery!==null && searchQuery.length>0 ){
     reset();
   };
 
-  console.log(authprofile);
-  console.log(tuits);
-
   return (
     <div className="ttr-home">
       <div className="border border-bottom-0">
