@@ -5,25 +5,45 @@ import { Controller, useForm } from "react-hook-form";
 import { Button, TextField, Typography } from "@mui/material";
 import * as authService from "../../services/auth-service";
 import * as tuitService from "../../services/tuits-service";
-
+import { useNavigate } from "react-router-dom";
+import { useSearchParams } from 'react-router-dom'
 const Home = () => {
+
+  const navigate = useNavigate();
   const [authprofile, setAuthProfile] = useState({});
   const [tuits, setTuits] = useState();
-
+  const [searchParams, setSearchParams] = useSearchParams();
+  let searchQuery=searchParams.get('q');
   useEffect(() => {
     const fetchProfile = async () => {
       try {
         const user = await authService.profile();
         setAuthProfile(user);
         const alltuit = await tuitService.findAllTuits();
+        
+        const tempTuits=[];
+if(searchQuery!==null && searchQuery.length>0 ){
+  searchQuery=searchQuery.toUpperCase();
+        for(let i=0;i<alltuit.length;i++){
+
+          const tuit=alltuit[i].tuit.toUpperCase();
+
+          if(tuit.indexOf(searchQuery)!==-1){
+            tempTuits.push(alltuit[i]);
+          }
+        }
+        setTuits(tempTuits);
+      } else {
         setTuits(alltuit);
+      }
+        
       } catch (e) {
-        // console.log("session profile not found, send to login page");
-        // navigate("/profile/login");
+      //   console.log("session profile not found, send to login page");
+      //   navigate("/profile/login");
       }
     };
     fetchProfile();
-  }, []);
+  }, [searchQuery]); 
 
   const fetchAllTuits = async () => {
     try {
