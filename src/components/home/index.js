@@ -54,9 +54,6 @@ const Home = () => {
     reset();
   };
 
-  // console.log(authprofile);
-  // console.log(tuits);
-
   return (
     <div className="ttr-home">
       <div className="border border-bottom-0">
