@@ -38,8 +38,8 @@ if(searchQuery!==null && searchQuery.length>0 ){
       }
         
       } catch (e) {
-         console.log("session profile not found, send to login page");
-         navigate("/profile/login");
+      //   console.log("session profile not found, send to login page");
+      //   navigate("/profile/login");
       }
     };
     fetchProfile();
