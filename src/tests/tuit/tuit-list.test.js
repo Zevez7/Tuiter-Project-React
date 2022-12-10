@@ -1,12 +1,15 @@
-// /**
-//  * @file test list component with mock axios
-//  */
+/**
+ * @file test list component with mock axios
+ */
 // import { screen, render } from "@testing-library/react";
 // import { HashRouter } from "react-router-dom";
-// import { findAllTuits } from "../services/tuits-service";
+// import { findAllTuits } from "../../services/tuits-service";
 // import axios from "axios";
-// import Tuits from "../components/tuits";
+// import Tuits from "../../components/tuits";
 
+test("placeholder test", () => {
+  "placeholder";
+});
 // /**
 //  * Mock axios with jest.mock
 //  * @param  {function} "axios" the function to be mocked
