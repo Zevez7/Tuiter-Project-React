@@ -58,7 +58,7 @@ const Editprofile = () => {
       try {
         const responseProfile = await serviceProfile.findProfileByUserId(id);
 
-        const data = await responseProfile[0];
+        const data = await responseProfile;
         // removing extra data and only keeping some
         const dataFiltered = {
           firstName: data.firstName,
