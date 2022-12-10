@@ -1,7 +1,14 @@
+/**
+ * @file This file is used to test the bookmark service
+ * /
 import * as BookmarkService from "../services/bookmark-service";
 
+/**
+  * Test bookmark creation
+  * @param  {string} "can create bookmark with REST API" name of the test
+  * @param  {function} async the function that is called
+  */
 describe('can create bookmark with REST API', () => {
-  // TODO: implement this
 
   test('can create bookmark with REST API', async () => {
 
@@ -17,6 +24,11 @@ describe('can create bookmark with REST API', () => {
 
 });
 
+/**
+  * Test bookmark deletion
+  * @param  {string} "can delete bookmark wtih REST API" name of the test
+  * @param  {function} async the function that is called
+  */
 describe('can delete bookmark wtih REST API', () => {
 
   test('can delete bookmark with REST API', async () => {
@@ -33,19 +45,15 @@ describe('can delete bookmark wtih REST API', () => {
 
 });
 
+/**
+  * Test can get retrive all bookmarks of a user
+  * @param  {string} "can retrieve bookmark of a user REST API" name of the test
+  * @param  {function} async the function that is called
+  */
 describe('can retrieve bookmark of a user REST API', () => {
   
   test('can create tuit with REST API', async () => {
 
-   /*   const createdTuit= await TuitService.createTuit(userId,oldTuit);
-      expect(createdTuit.tuit).toEqual(oldTuit.tuit);
-      expect(createdTuit.postedBy).toEqual(userId);
-     const lookedUpTuitById= await TuitService.findTuitById(createdTuit._id)
-     expect(createdTuit.tuit).toEqual(lookedUpTuitById.tuit);
-      expect(lookedUpTuitById.postedBy).toEqual(userId);
-      const deletedTuit= await TuitService.deleteTuit(createdTuit._id);
-     expect(deletedTuit.data.deletedCount).toEqual(1);
-     */
     const uid= '6359de6091bbeb778a1bd617'
     const tids=['6354bb867c06cb205a0e0caa', '6393e39904d41f2b8dc21241', '6393e05304d41f2b8dc21150'];
 
