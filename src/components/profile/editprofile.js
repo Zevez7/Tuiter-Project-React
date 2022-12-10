@@ -54,8 +54,8 @@ const Editprofile = () => {
 
   useEffect(() => {
     const fetchProfile = async () => {
-      const id = authprofile._id.toString();
       try {
+        const id = authprofile._id.toString();
         const responseProfile = await serviceProfile.findProfileByUserId(id);
 
         const data = await responseProfile;
@@ -84,8 +84,6 @@ const Editprofile = () => {
   useEffect(() => {
     reset(profileResp);
   }, [profileResp, reset]);
-
-  console.log("profileResp", profileResp);
 
   /**
    * OnClick cancel button this function is called
