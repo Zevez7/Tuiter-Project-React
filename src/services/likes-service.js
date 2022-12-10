@@ -32,11 +32,12 @@ export const findUsersThatLikeTheTuitByTuidId = (tid) =>
 export const deleteLike = (uid,tid) =>
   axios.delete(`${USER_API}/${uid}/likes/${tid}`).then((response) => response.data);
 
-  /*
 
- app.post("/users/:uid/likes/:tid", LikeController.likeController.likeATuit);
-            app.delete("/users/:uid/likes/:tid", LikeController.likeController.dislikeATuit);   
-            app.get("/users/:uid/likes", LikeController.likeController.findTuitsLikedByAUser); 
-            app.get("/tuits/:tid/likes", LikeController.likeController.findUsersThatLikedATuid);
+/**
+ * Find tuit liked by user id
+ * @param  {string} uid user id
+ * return LikeHistory of user
+ */
 
-  */
+export const findTuitsLikedByAUser = (uid) =>
+    axios.get(`${USER_API}/${uid}/likes`).then((response) => response.data);
