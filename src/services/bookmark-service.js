@@ -2,7 +2,6 @@
  * @file Create axios call function to node server
  */
 import axios from "axios";
-// change this to point to your server on Heroku
 
 const BASE_URL = "http://localhost:5000";
 const USER_API = `${BASE_URL}/users`;

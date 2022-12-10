@@ -4,7 +4,6 @@
 import axios from "axios";
 // change this to point to your server on Heroku
 
-// const BASE_URL = "https://engineer-software-dat-a3.herokuapp.com";
 const BASE_URL = "http://localhost:5000";
 const PROFILE_URL = `${BASE_URL}/profiles`;
 
