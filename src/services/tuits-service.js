@@ -59,3 +59,4 @@ export const deleteTuit = (uid) =>
  */
 export const updateTuit = (tid) =>
   axios.put(`${TUITS_API}/${tid}`).then((response) => response.data);
+
