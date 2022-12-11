@@ -1,10 +1,7 @@
 import { Box, Stack, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-
 import Tuits from "../tuits";
-import tuitsArray from "../tuits/tuits-data.json";
 import Bio from "./bio";
-
 import * as authService from "../../services/auth-service";
 import * as tuitService from "../../services/tuits-service";
 import * as serviceProfile from "../../services/profiles-service";
@@ -55,8 +52,8 @@ const Profile = () => {
         const uid = authprofile._id.toString();
         console.log("id", uid);
         const responseProfile = await serviceProfile.findProfileByUserId(uid);
-
-        setProfile(responseProfile[0]);
+        console.log("responseProfile", responseProfile);
+        setProfile(responseProfile);
 
         const myTuit = await tuitService.findTuitsByUser(uid);
         setMyTuits(myTuit);

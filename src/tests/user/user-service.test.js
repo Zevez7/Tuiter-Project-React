@@ -6,7 +6,7 @@ import {
   deleteUsersByUsername,
   findAllUsers,
   findUserById,
-} from "../services/users-service";
+} from "../../services/users-service";
 /**
  * Test create user
  * @param  {string} "createUser" name of the test
@@ -47,6 +47,7 @@ describe("createUser", () => {
     // insert new user in the database
     const newUser = await createUser(ripley);
 
+    // console.log(newUser);
     // verify inserted user's properties match parameter user
     expect(newUser.username).toEqual(ripley.username);
     expect(newUser.password).toEqual(ripley.password);

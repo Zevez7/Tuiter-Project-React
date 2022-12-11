@@ -4,24 +4,30 @@
 
 import {
   createTuit,
-  createTuitByUser,
+  createTuitByUserId,
   findAllTuits,
   findTuitsByUser,
   findTuitById,
   deleteTuit,
   updateTuit,
-} from "../services/tuits-service";
+  deleteTuitByUserId,
+} from "../../services/tuits-service";
+
+import {
+  createUser,
+  deleteUsersByUsername,
+} from "../../services/users-service";
 
 /**
  * Test to create tuit
- * @param  {string} "cancreatetuitwithRESTAPI" name of the test
+ * @param  {string}  name of the test
  * @param  {function} function to be called for testing
  */
 describe("can create tuit with REST API", () => {
   // sample tuit to insert
   const newTuits = {
     tuit: "tuiter testing",
-    postedBy: "63577431cd4eab25f6a5660f",
+    postedBy: "6394feff14b91bfd508745f1",
   };
 
   /**
@@ -30,7 +36,7 @@ describe("can create tuit with REST API", () => {
    */
   beforeAll(() => {
     // remove any/all users to make sure we create it in the test
-    return deleteTuit(newTuits.postedBy);
+    return deleteTuitByUserId(newTuits.postedBy);
   });
 
   /**
@@ -39,7 +45,7 @@ describe("can create tuit with REST API", () => {
    */
   afterAll(() => {
     // remove any data we created
-    return deleteTuit(newTuits.postedBy);
+    return deleteTuitByUserId(newTuits.postedBy);
   });
   /**
    * Test to insert new user
@@ -49,12 +55,12 @@ describe("can create tuit with REST API", () => {
   test("can insert new users with REST API", async () => {
     // insert new user in the database
     const createdTuit = await createTuit(newTuits);
-
     // verify inserted user's properties match parameter user
     expect(createdTuit.tuit).toEqual(newTuits.tuit);
     expect(createdTuit.postedBy).toEqual(newTuits.postedBy);
   });
 });
+
 /**
  * Test tuit delete
  * @param  {string} "candeletetuitwithRESTAPI" name of the test
@@ -63,8 +69,8 @@ describe("can create tuit with REST API", () => {
 describe("can delete tuit with REST API", () => {
   // sample tuit to insert
   const newTuits = {
-    tuit: "tuiter testing",
-    postedBy: "63577431cd4eab25f6a5660f",
+    tuit: "tuiter service testing",
+    postedBy: "6394feff14b91bfd508745f1",
   };
   /**
    * Setup before running test
@@ -72,7 +78,7 @@ describe("can delete tuit with REST API", () => {
    */
   beforeAll(() => {
     // remove any/all users to make sure we create it in the test
-    return deleteTuit(newTuits.postedBy);
+    return deleteTuitByUserId(newTuits.postedBy);
   });
 
   /**
@@ -81,7 +87,7 @@ describe("can delete tuit with REST API", () => {
    */
   afterAll(() => {
     // remove any data we created
-    return deleteTuit(newTuits.postedBy);
+    return deleteTuitByUserId(newTuits.postedBy);
   });
 
   /**
@@ -92,7 +98,7 @@ describe("can delete tuit with REST API", () => {
   test("can delete tuit with REST API", async () => {
     await createTuit(newTuits);
     // delete a tuit by their user id. Assumes tuit already exists
-    const status = await deleteTuit(newTuits.postedBy);
+    const status = await deleteTuitByUserId(newTuits.postedBy);
     // verify we deleted at least one user by their username
     expect(status.deletedCount).toBeGreaterThanOrEqual(1);
   });
@@ -116,7 +122,7 @@ describe("can retrieve a tuit by their primary key with REST API", () => {
    */
   beforeAll(() => {
     // remove any/all tuit to make sure we create it in the test
-    return deleteTuit(newTuits.postedBy);
+    return deleteTuitByUserId(newTuits.postedBy);
   });
   /**
    * Setup after running test
@@ -124,7 +130,7 @@ describe("can retrieve a tuit by their primary key with REST API", () => {
    */
   afterAll(() => {
     // remove any data we created
-    return deleteTuit(newTuits.postedBy);
+    return deleteTuitByUserId(newTuits.postedBy);
   });
   /**
    * Test to find the tuit by its primary key
@@ -154,10 +160,18 @@ describe("can retrieve a tuit by their primary key with REST API", () => {
  */
 describe("can retrieve all tuits with REST API", () => {
   // sample users we'll insert to then retrieve
+  const ripley = {
+    username: "ellenripley",
+    password: "lv426",
+    email: "ellenripley@aliens.com",
+  };
+  let newUser;
+  newUser = createUser(ripley);
+
   const tuits = [
-    { tuit: "tuiter testing 1", postedBy: "13577431cd4eab25f6a5660f" },
-    { tuit: "tuiter testing 2", postedBy: "23577431cd4eab25f6a5660f" },
-    { tuit: "tuiter testing 3", postedBy: "33577431cd4eab25f6a5660f" },
+    { tuit: "tuiter testing 1", postedBy: newUser._Id },
+    { tuit: "tuiter testing 2", postedBy: newUser._Id },
+    { tuit: "tuiter testing 3", postedBy: newUser._Id },
   ];
 
   const tuitsIndex = [
@@ -166,27 +180,28 @@ describe("can retrieve all tuits with REST API", () => {
     "tuiter testing 3",
   ];
 
+  let tuit1;
+  let tuit2;
+  let tuit3;
+
   /**
    * Setup before running test
    * @param  {function} function to be called
    */
-  beforeAll(() =>
+  beforeAll(async () =>
     // insert several known tuit
-    {
-      createTuit(tuits[0]);
-      createTuit(tuits[1]);
-      return createTuit(tuits[2]);
-    }
+    {}
   );
   /**
    * Setup after running test
    * @param  {function} function to be called
    */
-  afterAll(() => {
+  afterAll(async () => {
     // delete the tuits we inserted
-    deleteTuit("13577431cd4eab25f6a5660f");
-    deleteTuit("23577431cd4eab25f6a5660f");
-    return deleteTuit("33577431cd4eab25f6a5660f");
+    await deleteTuit(tuit1._id);
+    await deleteTuit(tuit2._id);
+    await deleteTuit(tuit3._id);
+    await deleteUsersByUsername(ripley.username);
   });
   /**
    * Test to find all users from the database
@@ -194,6 +209,9 @@ describe("can retrieve all tuits with REST API", () => {
    * @param  {function} function to be called for testing
    */
   test("can retrieve all users from REST API", async () => {
+    tuit1 = await createTuit(tuits[0]);
+    tuit2 = await createTuit(tuits[1]);
+    tuit3 = await createTuit(tuits[2]);
     // retrieve all the tuits
     const allTuits = await findAllTuits();
 
@@ -210,7 +228,6 @@ describe("can retrieve all tuits with REST API", () => {
       const tuitAdded = tuits.find((tuit) => tuit.tuit === tuitFound.tuit);
 
       expect(tuitFound.tuit).toEqual(tuitAdded.tuit);
-      expect(tuitFound.postedBy).toEqual(tuitAdded.postedBy);
     });
   });
 });

@@ -1,14 +1,14 @@
 /**
  * @file test for user list without axios mock
  */
-import { UserList } from "../components/profile/user-List";
+import { UserList } from "../../components/profile/user-list";
 import { screen, render } from "@testing-library/react";
 import { HashRouter } from "react-router-dom";
 import {
   createUser,
   deleteUsersByUsername,
   findAllUsers,
-} from "../services/users-service";
+} from "../../services/users-service";
 
 /**
  * Test for list render with no axios mox

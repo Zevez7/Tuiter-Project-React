@@ -8,8 +8,8 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import React from "react";
+// import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import InstagramIcon from "@mui/icons-material/Instagram";

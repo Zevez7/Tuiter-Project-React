@@ -4,14 +4,13 @@
 import axios from "axios";
 // change this to point to your server on Heroku
 
-// const BASE_URL = "https://engineer-software-dat-a3.herokuapp.com";
 const BASE_URL = "http://localhost:5000";
 const PROFILE_URL = `${BASE_URL}/profiles`;
 
 /**
  * Create a new tuit with a tuit
- * @param {tuit} tuit tuit to be created
  * @returns newly created tuit
+ * @param profile
  */
 export const createProfile = (profile) =>
   axios.post(`${PROFILE_URL}`, profile).then((response) => response.data);
@@ -32,3 +31,11 @@ export const findProfileByUserId = (uid) =>
  */
 export const updateProfileByUserId = (uid, profile) =>
   axios.put(`${PROFILE_URL}/${uid}`, profile).then((response) => response.data);
+
+/**
+ * delete user profile by user id
+ * @param {string} uid user id
+ * @returns delete profile status
+ */
+export const deleteProfileByUserId = (uid) =>
+  axios.delete(`${PROFILE_URL}/${uid}`).then((response) => response.data);

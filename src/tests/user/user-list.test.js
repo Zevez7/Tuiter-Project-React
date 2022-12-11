@@ -1,10 +1,10 @@
 /**
  * @file test user list
  */
-import { UserList } from "../components/profile/user-List";
+import { UserList } from "../../components/profile/user-list";
 import { screen, render } from "@testing-library/react";
 import { HashRouter } from "react-router-dom";
-import { findAllUsers } from "../services/users-service";
+import { findAllUsers } from "../../services/users-service";
 import axios from "axios";
 /**
  * Jest mock axios
