@@ -19,7 +19,6 @@ import { createUser } from "../../services/users-service";
  */
 describe("profile renders asyn", () => {
   const MOCKED_PROFILE = {
-    _id: "634079953704de375bfca834",
     userId: "6359de6091bbeb778a1bd617",
     profileImage:
       "www.wikipedia.org/portal/wikipedia.org/assets/img/Wikipedia-logo-v2@2x.png",
@@ -31,7 +30,6 @@ describe("profile renders asyn", () => {
     interest1: "Software Developer",
     interest2: "Healthcare",
     interest3: "Machine Learning",
-    friends: ["634079953704de375bfca834", "634079953704de375bfca834"],
   };
 
   const MOCKED_USER = {

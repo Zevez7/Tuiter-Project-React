@@ -26,7 +26,6 @@ describe("test createProfile", () => {
     interest1: "Software Developer",
     interest2: "Healthcare",
     interest3: "Machine Learning12",
-    friends: ["634079953704de375bfca834", "634079953704de375bfca834"],
   };
 
   /**
@@ -116,7 +115,6 @@ describe("test createProfile", () => {
       interest1: "Sleeping",
       interest2: "Working",
       interest3: "Traveling",
-      friends: ["634079953704de375bfca834", "634079953704de375bfca834"],
     };
     const result = await updateProfileByUserId(
       createdProfile.userId,

@@ -1,4 +1,5 @@
 Tuit Project
+Team 10
 By Dat, Matt, Ujjval, Heye
 
 Driection to install
