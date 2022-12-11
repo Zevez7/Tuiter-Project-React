@@ -2,9 +2,7 @@
  * @file Create axios call function to node server
  */
 import axios from "axios";
-// change this to point to your server on Heroku
 
-// const BASE_URL = "https://engineer-software-dat-a3.herokuapp.com";
 const BASE_URL = "http://localhost:5000";
 const TUITS_API = `${BASE_URL}/tuits`;
 const USER_API = `${BASE_URL}/users`;
@@ -22,7 +20,7 @@ export const createTuit = (tuit) =>
  * @param  {tuit} tuit tuit to be created
  * return newly created tuit
  */
-export const createTuitByUser = (uid, tuit) =>
+export const createTuitByUserId = (uid, tuit) =>
   axios
     .post(`${USER_API}/${uid}/tuits`, tuit)
     .then((response) => response.data);
@@ -46,12 +44,21 @@ export const findTuitsByUser = (uid) =>
 export const findTuitById = (tid) =>
   axios.get(`${TUITS_API}/${tid}`).then((response) => response.data);
 /**
+ * Delete tuit by tuit id
+ * @param  {string} tid user id
+ * return delete status
+ */
+export const deleteTuit = (tid) =>
+  axios.delete(`${TUITS_API}/${tid}`).then((response) => response.data);
+
+/**
  * Delete tuit by user id
  * @param  {string} uid user id
  * return delete status
  */
-export const deleteTuit = (uid) =>
-  axios.delete(`${TUITS_API}/${uid}`).then((response) => response.data);
+export const deleteTuitByUserId = (uid) =>
+  axios.delete(`${TUITS_API}/user/${uid}`).then((response) => response.data);
+
 /**
  * Update tuit by tuit id
  * @param  {string} tid tuit id

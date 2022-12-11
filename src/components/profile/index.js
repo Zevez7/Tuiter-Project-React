@@ -55,8 +55,8 @@ const Profile = () => {
         const uid = authprofile._id.toString();
         console.log("id", uid);
         const responseProfile = await serviceProfile.findProfileByUserId(uid);
-
-        setProfile(responseProfile[0]);
+        console.log("responseProfile", responseProfile);
+        setProfile(responseProfile);
 
         const myTuit = await tuitService.findTuitsByUser(uid);
         setMyTuits(myTuit);

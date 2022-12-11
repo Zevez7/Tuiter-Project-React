@@ -54,11 +54,11 @@ const Editprofile = () => {
 
   useEffect(() => {
     const fetchProfile = async () => {
-      const id = authprofile._id.toString();
       try {
+        const id = authprofile._id.toString();
         const responseProfile = await serviceProfile.findProfileByUserId(id);
 
-        const data = await responseProfile[0];
+        const data = await responseProfile;
         // removing extra data and only keeping some
         const dataFiltered = {
           firstName: data.firstName,
@@ -84,8 +84,6 @@ const Editprofile = () => {
   useEffect(() => {
     reset(profileResp);
   }, [profileResp, reset]);
-
-  console.log("profileResp", profileResp);
 
   /**
    * OnClick cancel button this function is called
