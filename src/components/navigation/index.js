@@ -1,7 +1,6 @@
 import React from "react";
 import "./navigation.css";
 import { useLocation, Link } from "react-router-dom";
-import { Box, Typography } from "@mui/material";
 import CropSquareIcon from "@mui/icons-material/CropSquare";
 import HomeIcon from "@mui/icons-material/Home";
 import ExploreIcon from "@mui/icons-material/Explore";

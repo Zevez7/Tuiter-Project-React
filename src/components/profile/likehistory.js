@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 function Likedhistory() {
   const navigate = useNavigate();
   const [myLikedTuits, setMyLikedTuits] = useState([]);
-  const [authprofile, setAuthProfile] = useState({});
+  const [, setAuthProfile] = useState({});
 
   useEffect(() => {
     const fetchProfile = async () => {

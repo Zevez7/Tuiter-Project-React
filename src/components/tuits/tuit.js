@@ -2,9 +2,8 @@ import React, {useState, useEffect} from "react";
 import TuitStats from "./tuit-stats";
 import TuitImage from "./tuit-image";
 import TuitVideo from "./tuit-video";
-import { useNavigate, Link } from "react-router-dom";
 import { Avatar } from "@mui/material";
-import { AddCommentSharp } from "@mui/icons-material";
+
 import * as CommentService from '../../services/comment-service';
 
 const Tuit = ({ tuit, likeTuit, bookmarkTuit, currentUser,index, deleteBookmark }) => {
@@ -53,8 +52,8 @@ const Tuit = ({ tuit, likeTuit, bookmarkTuit, currentUser,index, deleteBookmark 
     setcommentCount((prevCount)=>prevCount+1);
 
 const saveComment = async ()=> {
-  const tempComment = {commentedBy: currentUser._id,commentedTuit: tuit._id,comment:commentText };
-  const commentResult= await CommentService.createComment(tempComment);
+  // const tempComment = {commentedBy: currentUser._id,commentedTuit: tuit._id,comment:commentText };
+  // const commentResult= await CommentService.createComment(tempComment);
 }
  saveComment();
   }

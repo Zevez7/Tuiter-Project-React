@@ -1,10 +1,7 @@
 import { Box, Stack, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-
 import Tuits from "../tuits";
-import tuitsArray from "../tuits/tuits-data.json";
 import Bio from "./bio";
-
 import * as authService from "../../services/auth-service";
 import * as tuitService from "../../services/tuits-service";
 import * as serviceProfile from "../../services/profiles-service";

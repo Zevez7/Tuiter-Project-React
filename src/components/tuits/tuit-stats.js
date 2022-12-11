@@ -1,16 +1,15 @@
 import React, {useState,useEffect} from "react";
 import Bookmark from "../bookmarks/bookmark";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import * as LikeService from '../../services/likes-service';
-const TuitStats = ({ tuit, bookmarkTuit = () => {}, currentUser, index, deleteBookmark, displayComment, commentCount }) => {
-  let likeValueDisplayLogic;
+const TuitStats = ({ tuit, currentUser, index, deleteBookmark, displayComment, commentCount }) => {
+  // let likeValueDisplayLogic;
 
   if (tuit.stats && tuit.stats.likes) {
     if (tuit.stats.likes > 0) {
-      likeValueDisplayLogic = <FavoriteIcon sx={{ color: "red" }} />;
+      // likeValueDisplayLogic = <FavoriteIcon sx={{ color: "red" }} />;
     }
   } else if (tuit.stats && tuit.stats.likes <= 0) {
-    likeValueDisplayLogic = <FavoriteIcon sx={{ color: "gray" }} />;
+    // likeValueDisplayLogic = <FavoriteIcon sx={{ color: "gray" }} />;
   }
 
   const [isTuitLiked, setIsTuitLiked] = useState(false);

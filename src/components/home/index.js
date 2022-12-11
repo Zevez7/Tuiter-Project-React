@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Tuits from "../tuits";
-import tuitsArray from "../tuits/tuits-data.json";
 import { Controller, useForm } from "react-hook-form";
 import { Button, TextField, Typography } from "@mui/material";
 import * as authService from "../../services/auth-service";
@@ -11,7 +10,7 @@ const Home = () => {
   const navigate = useNavigate();
   const [authprofile, setAuthProfile] = useState({});
   const [tuits, setTuits] = useState();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   let searchQuery = searchParams.get("q");
   useEffect(() => {
     const fetchProfile = async () => {
