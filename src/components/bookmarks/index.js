@@ -33,8 +33,8 @@ function Bookmarks() {
          setMyBookmarkedTuits(tuits);
          setAuthProfile(user);
       } catch (e) {
-        alert("session profile not found, send to login page");
-        navigate("/profile/login");
+        // alert("session profile not found, send to login page");
+        // navigate("/profile/login");
       }
     };
     fetchProfile();
