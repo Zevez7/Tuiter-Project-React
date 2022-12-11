@@ -1,3 +1,23 @@
+Tuit Project
+By Dat, Matt, Ujjval, Heye
+
+Driection to install
+
+- Copy GitRepo from Github
+- Check "main" branch
+- Open terminal
+- Type "npm install" to download node_module
+
+Direction to start react server
+
+- Make sure node server is running
+- Type "npm start" to star the react server
+
+Direction to test
+
+- Make sure node server is running
+- Type "npm test" to test
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
