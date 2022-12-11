@@ -21,6 +21,13 @@ Direction to test
 - Make sure node server is running
 - Type "npm test" to test
 
+Direction to signup/login
+
+- Make sure to have both react and node servers running
+- Click the profile link on the left nav bar
+- Login if you already have signed up
+- Sign up if you do not have an account
+
 End of Readme
 
 ---
