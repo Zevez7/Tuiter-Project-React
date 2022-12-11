@@ -10,8 +10,8 @@ const TUIT_API = `${BASE_URL}/tuits`;
 
 /**
  * Create a new like of a tuit
- * @param {tuit} tuit tuit to be created
  * @returns newly created tuit
+ * @param comment
  */
 export const createComment = (comment) =>{
     console.log('comment in api: '+JSON.stringify(comment))
@@ -20,7 +20,7 @@ export const createComment = (comment) =>{
 
 /**
  * Find users that like the tuit by id
- * @param  {string} uid user id
+ * @param tid
  */
 export const findUsersThatCommentTheTuitByTuidId = (tid) =>
   axios.get(`${TUIT_API}/${tid}/comments`).then((response) => response.data);

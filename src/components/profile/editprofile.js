@@ -3,7 +3,7 @@
  */
 import { Box, Button, TextField, Typography } from "@mui/material";
 import React, { useEffect, useMemo, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Controller, useForm } from "react-hook-form";
 import * as serviceProfile from "../../services/profiles-service";
 import * as authService from "../../services/auth-service";

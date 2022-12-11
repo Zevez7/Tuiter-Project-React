@@ -1,5 +1,5 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import * as authService from "../../services/auth-service";
@@ -7,18 +7,7 @@ import Signup from "./signup";
 
 const Login = () => {
   const navigate = useNavigate();
-  // const [loginUser, setLoginUser] = useState({});
 
-  // const login = () => {
-  //   console.log(loginUser);
-  //   return authService
-  //     .login(loginUser)
-  //     .then((user) => {
-  //       console.log(user);
-  //       navigate("/profile");
-  //     })
-  //     .catch((e) => alert(e));
-  // };
   const onSubmit = (data) => {
     console.log(data);
 

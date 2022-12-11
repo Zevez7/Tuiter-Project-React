@@ -1,17 +1,21 @@
-// /**
-//  * @file Test tuit list without mocking
-//  */
+/**
+ * @file Test tuit list without mocking
+ */
 // import { screen, render } from "@testing-library/react";
 // import { HashRouter } from "react-router-dom";
 // import {
 //   createTuit,
 //   deleteTuit,
 //   findAllTuits,
-// } from "../services/tuits-service";
+// } from "../../services/tuits-service";
 // import axios from "axios";
-// import Tuits from "../components/tuits";
-// import { UserList } from "../components/profile/user-List";
-// import { deleteUsersByUsername } from "../services/users-service";
+// import Tuits from "../../components/tuits";
+// import { UserList } from "../../components/profile/user-List";
+// import { deleteUsersByUsername } from "../../services/users-service";
+
+test("placeholder test", () => {
+  "placeholder";
+});
 
 // /**
 //  * Test to render tuit list with tuit data from the database

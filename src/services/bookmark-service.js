@@ -8,8 +8,9 @@ const USER_API = `${BASE_URL}/users`;
 
 /**
  * Create a new bookmark of a tuit
- * @param {tuit} tuit tuit to be created
  * @returns newly created tuit
+ * @param uid
+ * @param tid
  */
 export const createBookmark = (uid,tid) =>
   axios.post(`${USER_API}/${uid}/bookmarks/${tid}`).then((response) => response.data);
@@ -21,9 +22,10 @@ export const findTuitsByUser = (uid) =>
   axios.get(`${USER_API}/${uid}/bookmarks`).then((response) => response.data);
 
   /**
- * Find bookmark by user id
- * @param  {string} uid user id
- */
+   * Find bookmark by user id
+   * @param  {string} uid user id
+   * @param tid
+   */
 export const findBookmarkByUserAndTuit = (uid,tid) =>
 axios.get(`${USER_API}/${uid}/bookmarks/${tid}`).then((response) => response.data);
 /**
@@ -34,35 +36,3 @@ axios.get(`${USER_API}/${uid}/bookmarks/${tid}`).then((response) => response.dat
  */
 export const deleteBookmark = (uid,tid) =>
   axios.delete(`${USER_API}/${uid}/bookmarks/${tid}`).then((response) => response.data);
-
-
-
-
-/*
-
-   app.post(
-        "/users/:uid/bookmarks/:tid",
-        BookmarkController.bookmarkController.bookmarkATuit
-      );
-      app.delete(
-        "/users/:uid/bookmarks/:tid",
-        BookmarkController.bookmarkController.unBookmarkATuit
-      );
-      app.get(
-        "/users/:uid/bookmarks",
-        BookmarkController.bookmarkController.findTuitsBookmarkedByAUser
-      );
-      app.get(
-        "/tuits/:tid/bookmarks",
-        BookmarkController.bookmarkController.findUsersThatBookmarkedATuit
-      );
-      app.delete(
-        "/users/:uid/bookmarks",
-        BookmarkController.bookmarkController.removeTuitsBookmarkedByAUser
-      );
-      app.delete(
-        "/tuits/:tid/bookmarks",
-        BookmarkController.bookmarkController.removeUsersWhoBookmarkedATuit
-      );
-
-*/

@@ -9,6 +9,7 @@ import * as authService from "../../services/auth-service";
  * Tuits react component
  * @param  {tuits} tuits array of tuit data that will be rendered
  *
+ * @param setMyBookmarkedTuits
  * */
 const Tuits = ({ tuits = [], setMyBookmarkedTuits }) => {
 

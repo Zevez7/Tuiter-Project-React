@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Tuits from "../tuits";
-import tuitsArray from "../tuits/tuits-data.json";
 import * as authService from "../../services/auth-service";
-import * as tuitService from "../../services/tuits-service";
+
 import * as UserService from "../../services/users-service";
 import * as BookmarkService from '../../services/bookmark-service'
 import { useNavigate } from "react-router-dom";
@@ -11,7 +10,7 @@ function Bookmarks() {
 
   const navigate = useNavigate();
   const [myBookmarkedTuits, setMyBookmarkedTuits] = useState([]);
-  const [authprofile, setAuthProfile] = useState({});
+  const [setAuthProfile] = useState({});
 
   useEffect(() => { 
     const fetchProfile = async () => {
@@ -33,8 +32,8 @@ function Bookmarks() {
          setMyBookmarkedTuits(tuits);
          setAuthProfile(user);
       } catch (e) {
-        alert("session profile not found, send to login page");
-        navigate("/profile/login");
+        // alert("session profile not found, send to login page");
+        // navigate("/profile/login");
       }
     };
     fetchProfile();

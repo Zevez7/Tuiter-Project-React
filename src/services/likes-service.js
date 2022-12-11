@@ -9,14 +9,15 @@ const TUIT_API = `${BASE_URL}/tuits`;
 
 /**
  * Create a new like of a tuit
- * @param {tuit} tuit tuit to be created
  * @returns newly created tuit
+ * @param uid
+ * @param tid
  */
 export const createLike = (uid,tid) =>
   axios.post(`${USER_API}/${uid}/likes/${tid}`).then((response) => response.data);
 /**
  * Find users that like the tuit by id
- * @param  {string} uid user id
+ * @param tid
  */
 export const findUsersThatLikeTheTuitByTuidId = (tid) =>
   axios.get(`${TUIT_API}/${tid}/likes`).then((response) => response.data);

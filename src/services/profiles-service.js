@@ -9,8 +9,8 @@ const PROFILE_URL = `${BASE_URL}/profiles`;
 
 /**
  * Create a new tuit with a tuit
- * @param {tuit} tuit tuit to be created
  * @returns newly created tuit
+ * @param profile
  */
 export const createProfile = (profile) =>
   axios.post(`${PROFILE_URL}`, profile).then((response) => response.data);
