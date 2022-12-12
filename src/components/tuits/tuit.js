@@ -55,7 +55,6 @@ const Tuit = ({ tuit, likeTuit, bookmarkTuit, currentUser,index, deleteBookmark 
  const saveComment = async ()=> {
    const tempComment = {commentedBy: currentUser._id,commentedTuit: tuit._id,comment:commentText };
    const commentResult= await CommentService.createComment(tempComment);
-   console.log('comment created: '+JSON.stringify(commentResult));
  }
   saveComment();
    }
