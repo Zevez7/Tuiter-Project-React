@@ -3,7 +3,7 @@
  */
 import axios from "axios";
 
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = "http://localhost:5002";
 const USERS_API = `${BASE_URL}/users`;
 
 /**

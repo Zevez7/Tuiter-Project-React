@@ -4,7 +4,7 @@
 import axios from "axios";
 // change this to point to your server on Heroku
 
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = "http://localhost:5002";
 const PROFILE_URL = `${BASE_URL}/profiles`;
 
 /**

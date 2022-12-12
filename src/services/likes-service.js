@@ -3,7 +3,7 @@
  */
 import axios from "axios";
 
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = "http://localhost:5002";
 const USER_API = `${BASE_URL}/users`;
 const TUIT_API = `${BASE_URL}/tuits`;
 

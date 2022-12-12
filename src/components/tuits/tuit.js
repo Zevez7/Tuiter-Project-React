@@ -31,32 +31,35 @@ const Tuit = ({ tuit, likeTuit, bookmarkTuit, currentUser,index, deleteBookmark 
   };
 
   const [showCommentSection,setCommentSection]= useState(false);
-  const [commentCount,setcommentCount]= useState(100);
-  const [commentText,setCommentText]= useState('dummy comment');
-  const [comments,setComments] = useState([{
-    commentedBy: {username: 'dummy username'},
-    commentedTuit: 'dummy tuit',
-    comment: 'dummy text'
-   }]);
+  const [commentCount,setcommentCount]= useState(0);
+  const [commentText,setCommentText]= useState('');
+  const [comments,setComments] = useState([]);
   const displayComment = () =>{
     setCommentSection(!showCommentSection);
   }
 
   const addComment =() =>{
-   const comment={
-    commentedBy: currentUser,
-    commentedTuit: tuit,
-    comment: commentText
-   };
-   setComments((prevComments)=>[comment,...prevComments]);
-    setcommentCount((prevCount)=>prevCount+1);
 
-const saveComment = async ()=> {
-  // const tempComment = {commentedBy: currentUser._id,commentedTuit: tuit._id,comment:commentText };
-  // const commentResult= await CommentService.createComment(tempComment);
-}
- saveComment();
-  }
+    if(commentText === '' || commentText === null){
+      alert('Please add characters to your comment');
+      return;
+    }
+    const comment={
+     commentedBy: currentUser,
+     commentedTuit: tuit,
+     comment: commentText
+    };
+    setComments((prevComments)=>[comment,...prevComments]);
+     setcommentCount((prevCount)=>prevCount+1);
+ 
+ const saveComment = async ()=> {
+   const tempComment = {commentedBy: currentUser._id,commentedTuit: tuit._id,comment:commentText };
+   const commentResult= await CommentService.createComment(tempComment);
+   console.log('comment created: '+JSON.stringify(commentResult));
+ }
+  saveComment();
+   }
+ 
 
 useEffect(()=>{
 
@@ -112,8 +115,10 @@ useEffect(()=>{
   </div>
   <br />
   </>)}
-    <textarea className="form-control" id="exampleFormControlTextarea1" rows="2" placeholder='Enter your comment' onChange={(e)=>setCommentText(e.target.value)}></textarea>
-    <button type="button" className="btn btn-primary" style={{float:'right'}} onClick={()=>addComment()}>Comment</button>
+  {JSON.stringify(currentUser)!=='{}' && 
+  <><textarea className="form-control" id="exampleFormControlTextarea1" rows="2" placeholder='Enter your comment' onChange={(e)=>setCommentText(e.target.value)}></textarea>
+    <button type="button" className="btn btn-primary" style={{float:'right'}} onClick={()=>addComment()}>Comment</button> 
+    </>}
   </div>
 </div>}
       </div>
