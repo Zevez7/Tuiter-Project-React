@@ -6,7 +6,7 @@ import { Avatar } from "@mui/material";
 
 import * as CommentService from '../../services/comment-service';
 
-const Tuit = ({ tuit, likeTuit, bookmarkTuit, currentUser,index, deleteBookmark }) => {
+const Tuit = ({ tuit, likeTuit, bookmarkTuit, currentUser,index, deleteBookmark, setTuits=()=>{} }) => {
   const daysOld = (tuit) => {
     const now = new Date();
     const nowMillis = now.getTime();
@@ -103,6 +103,7 @@ useEffect(()=>{
           deleteBookmark={deleteBookmark}
           displayComment={displayComment}
           commentCount={commentCount}
+          setTuits={setTuits}
         />
       {showCommentSection &&  <div className="card">
    <div className="card-body">
