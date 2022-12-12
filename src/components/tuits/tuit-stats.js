@@ -83,32 +83,63 @@ const TuitStats = ({ tuit, currentUser, index, deleteBookmark, displayComment, c
 
 
   return (
+    <>
+    {JSON.stringify(currentUser)!=='{}'&&
     <div className="row mt-2">
-
-      <div className="col">
-        <i className="far fa-message me-1" onClick={()=>displayComment()}></i>
-        {commentCount}
-      </div>
-      <div className="col">
-        <i className="far fa-retweet me-1" onClick={()=>addRetuit()}></i>
-        {reTuitCount}
-      </div>
-      {isTuitLiked&& 
-      <div className="col">
-      <i className='fa fa-heart ' style={{color:'red'}} onClick={()=>likeTuit()} ></i>
-      {likeCount}
-      </div>
+    <div className="col">
+      <i className="far fa-message me-1" onClick={()=>displayComment()}></i>
+      {commentCount}
+    </div>
+    <div className="col">
+      <i className="far fa-retweet me-1" onClick={()=>addRetuit()}></i>
+      {reTuitCount}
+    </div>
+    {isTuitLiked&& 
+    <div className="col">
+    <i className='fa fa-heart ' style={{color:'red'}} onClick={()=>likeTuit()} ></i>
+    {likeCount}
+    </div>
 }
 {!isTuitLiked&&<div className="col">
-      <i className='fa fa-heart' onClick={()=>likeTuit()}></i>
-      {likeCount}
-      </div>
-}
-      <div className="col">
-        <i className="far fa-inbox-out"></i>
-      </div>
-      <div className="col">{Bookmark(tuit,currentUser,index,deleteBookmark)}</div>
+    <i className='fa fa-heart' onClick={()=>likeTuit()}></i>
+    {likeCount}
     </div>
+}
+    <div className="col">
+      <i className="far fa-inbox-out"></i>
+    </div>
+    <div className="col">{Bookmark(tuit,currentUser,index,deleteBookmark)}</div>
+  </div>}
+  {JSON.stringify(currentUser)=='{}'&&
+    <div className="row mt-2">
+    <div className="col">
+      <i className="far fa-message me-1" ></i>
+      {commentCount}
+    </div>
+    <div className="col">
+      <i className="far fa-retweet me-1" ></i>
+      {reTuitCount}
+    </div>
+    {isTuitLiked&& 
+    <div className="col">
+    <i className='fa fa-heart ' style={{color:'red'}}  ></i>
+    {likeCount}
+    </div>
+}
+{!isTuitLiked&&<div className="col">
+    <i className='fa fa-heart' ></i>
+    {likeCount}
+    </div>
+}
+    <div className="col">
+      <i className="far fa-inbox-out"></i>
+    </div>
+    <div className="col">
+    <i className="far fa-bookmark"></i>
+    </div>
+  </div>}
+    
+    </>
   );
 };
 export default TuitStats;

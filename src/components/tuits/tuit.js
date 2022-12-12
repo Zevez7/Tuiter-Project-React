@@ -5,8 +5,9 @@ import TuitVideo from "./tuit-video";
 import { Avatar } from "@mui/material";
 
 import * as CommentService from '../../services/comment-service';
+import * as TuitService from "../../services/tuits-service";
 
-const Tuit = ({ tuit, likeTuit, bookmarkTuit, currentUser,index, deleteBookmark, setTuits=()=>{} }) => {
+const Tuit = ({ tuit, likeTuit, bookmarkTuit, currentUser,index, deleteBookmark=()=>{}, setTuits=()=>{}, tuits=[] }) => {
   const daysOld = (tuit) => {
     const now = new Date();
     const nowMillis = now.getTime();
@@ -58,6 +59,16 @@ const Tuit = ({ tuit, likeTuit, bookmarkTuit, currentUser,index, deleteBookmark,
  }
   saveComment();
    }
+
+   const deleteTuit = async () =>{
+
+let filteredTuit = tuits.filter(function(tempTuit) {
+  return tempTuit._id!==tuit._id;
+});
+const deleteStatus = await TuitService.deleteTuit(tuit._id);
+
+setTuits(filteredTuit);
+   }
  
 
 useEffect(()=>{
@@ -76,7 +87,7 @@ useEffect(()=>{
   return (
     // <li onClick={() => navigate(`/tuit/${tuit._id}`)}
     <li className="p-2 ttr-tuit list-group-item d-flex rounded-0">
-      <div className="pe-2">
+      <div className="pe-2" >
         {tuit.postedBy && (
           // <img src={`../images/${tuit.postedBy.username}.jpg`}
           //   className="ttr-tuit-avatar-logo rounded-circle" />
@@ -90,10 +101,12 @@ useEffect(()=>{
           {tuit.postedBy && tuit.postedBy.username}@
           {tuit.postedBy && tuit.postedBy.username} -
           <span className="ms-1">{daysOld(tuit)}</span>
+         {JSON.stringify(currentUser)!=='{}'&& tuit.postedBy._id === currentUser._id && <i className="fa fa-trash" aria-hidden="true" style={{float:'right', color: 'red'}} onClick={()=>deleteTuit()}></i>}
         </h2>
         {tuit.tuit}
         {tuit.youtube && <TuitVideo tuit={tuit} />}
         {tuit.image && <TuitImage tuit={tuit} />}
+        
         <TuitStats
           tuit={tuit}
           currentUser={currentUser}
