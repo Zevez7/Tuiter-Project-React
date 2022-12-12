@@ -1,6 +1,7 @@
 import React, {useState,useEffect} from "react";
 import Bookmark from "../bookmarks/bookmark";
 import * as LikeService from '../../services/likes-service';
+import { AddReactionOutlined } from "@mui/icons-material";
 const TuitStats = ({ tuit, currentUser, index, deleteBookmark, displayComment, commentCount }) => {
   // let likeValueDisplayLogic;
 
@@ -14,6 +15,7 @@ const TuitStats = ({ tuit, currentUser, index, deleteBookmark, displayComment, c
 
   const [isTuitLiked, setIsTuitLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
+  const [reTuitCount, setReTuitCount] = useState(0);
 
 
   const likeTheTuit = async ()=>{
@@ -40,6 +42,10 @@ const TuitStats = ({ tuit, currentUser, index, deleteBookmark, displayComment, c
     setLikeCount((prevCount)=>prevCount-1);
   }
   
+  }
+  const addRetuit =()=> {
+    setReTuitCount((prevCount)=>prevCount+1);
+
   }
 
   useEffect(() => {
@@ -68,8 +74,8 @@ const TuitStats = ({ tuit, currentUser, index, deleteBookmark, displayComment, c
         {commentCount}
       </div>
       <div className="col">
-        <i className="far fa-retweet me-1"></i>
-        {tuit.stats && tuit.stats.retuits}
+        <i className="far fa-retweet me-1" onClick={()=>addRetuit()}></i>
+        {reTuitCount}
       </div>
       {isTuitLiked&& 
       <div className="col">
