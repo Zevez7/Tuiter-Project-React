@@ -1,10 +1,9 @@
 /**
  * @file Edit profile page
  */
-import { Box, Button, TextField, Typography } from "@mui/material";
-import React, { useEffect, useMemo, useState } from "react";
+import { Box, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Controller, useForm } from "react-hook-form";
 import * as serviceProfile from "../../services/profiles-service";
 import * as authService from "../../services/auth-service";
 import EditProfileForm from "./editProfileForm";
