@@ -32,9 +32,14 @@ const MOCKED_USER = {
   email: "Spiderman@web.com",
 };
 
+/**
+ * Test editprofile form componenet with mocked profile and mocked user data
+ * @param  {string} name of the test
+ * @param  {function} function to be called
+ */
 describe("profile edit page testing", () => {
   /**
-   * Test to render Bio component with data from server
+   * Test to render editprofileform component with mocked data
    * @param  {string} name of the test
    * @param  {function} function to be called
    */
@@ -44,7 +49,7 @@ describe("profile edit page testing", () => {
         <EditProfileForm
           profileResp={MOCKED_PROFILE}
           authprofile={MOCKED_USER}
-        />{" "}
+        />
       </HashRouter>
     );
 
