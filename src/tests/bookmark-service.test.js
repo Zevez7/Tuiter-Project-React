@@ -1,7 +1,10 @@
 /**
  * @file This file is used to test the bookmark service
- * /
+ **/
+
 import * as BookmarkService from "../services/bookmark-service";
+import * as UserService from "../services/users-service";
+import * as TuitService from "../services/tuits-service";
 
 /**
   * Test bookmark creation
@@ -12,15 +15,21 @@ describe('can create bookmark with REST API', () => {
 
   test('can create bookmark with REST API', async () => {
 
-    const uid= '6359de6091bbeb778a1bd617'
-    const tid='6354bb867c06cb205a0e0caa';
-     const createBookmark = await BookmarkService.createBookmark(uid,tid)
+    const user= await UserService.createUser({'username': 'dummy', 'password': 'dummy'});
+    const tuit= await TuitService.createTuit({'tuit':'new tuit'});
+    const uid=user._id;
+    const tid=tuit._id
+
+    const createBookmark = await BookmarkService.createBookmark(uid,tid)
      expect(uid).toEqual(createBookmark.bookmarkedBy);   
      expect(tid).toEqual(createBookmark.bookmarkedTuit);
      const deletedBookmark = await BookmarkService.deleteBookmark(uid,tid);
+     const deletedTuit = await TuitService.deleteTuit(tid);
+     const deletedUser = await UserService.deleteUser(uid)
+
 
   });
-
+ 
 
 });
 
@@ -29,17 +38,22 @@ describe('can create bookmark with REST API', () => {
   * @param  {string} "can delete bookmark wtih REST API" name of the test
   * @param  {function} async the function that is called
   */
+
 describe('can delete bookmark wtih REST API', () => {
 
   test('can delete bookmark with REST API', async () => {
 
-    const uid= '6359de6091bbeb778a1bd617'
-    const tid='6354bb867c06cb205a0e0caa';
+    const user= await UserService.createUser({'username': 'dummy', 'password': 'dummy'});
+    const tuit= await TuitService.createTuit({'tuit':'new tuit'});
+    const uid=user._id;
+    const tid=tuit._id
      const createBookmark = await BookmarkService.createBookmark(uid,tid)
      expect(uid).toEqual(createBookmark.bookmarkedBy);   
      expect(tid).toEqual(createBookmark.bookmarkedTuit);
      const deletedBookmark = await BookmarkService.deleteBookmark(uid,tid);
      expect(deletedBookmark.deletedCount).toEqual(1); 
+     const deletedTuit = await TuitService.deleteTuit(tid);
+     const deletedUser = await UserService.deleteUser(uid);
 
   });
 
@@ -50,12 +64,22 @@ describe('can delete bookmark wtih REST API', () => {
   * @param  {string} "can retrieve bookmark of a user REST API" name of the test
   * @param  {function} async the function that is called
   */
+
 describe('can retrieve bookmark of a user REST API', () => {
   
   test('can create tuit with REST API', async () => {
 
-    const uid= '6359de6091bbeb778a1bd617'
-    const tids=['6354bb867c06cb205a0e0caa', '6393e39904d41f2b8dc21241', '6393e05304d41f2b8dc21150'];
+
+    const user= await UserService.createUser({'username': 'dummy', 'password': 'dummy'});
+    const uid=user._id;
+
+    const tids=[];
+
+    for(let i=0;i<3;i++){
+      const tuit= await TuitService.createTuit({'tuit':'new tuit'});
+      const tid=tuit._id
+      tids.push(tid);
+    }
 
 
     for(let i=0;i<tids.length;i++){
@@ -79,6 +103,10 @@ describe('can retrieve bookmark of a user REST API', () => {
         const deletedBookmark = await BookmarkService.deleteBookmark(uid,tids[i]);
  
      }
+     for(let i=0;i<3;i++){
+     let deletedTuit = await TuitService.deleteTuit(tids[i])
+    }
+    const deletedUser = await UserService.deleteUser(uid);
 
   });
 

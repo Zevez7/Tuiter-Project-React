@@ -7,7 +7,7 @@ import { Avatar } from "@mui/material";
 import * as CommentService from '../../services/comment-service';
 import * as TuitService from "../../services/tuits-service";
 
-const Tuit = ({ tuit, likeTuit, bookmarkTuit, currentUser,index, deleteBookmark=()=>{}, setTuits=()=>{}, tuits=[] }) => {
+const Tuit = ({ tuit, likeTuit, bookmarkTuit, currentUser,index, deleteBookmark=()=>{}, setTuits=()=>{}, tuits=[], showTuitStat }) => {
   const daysOld = (tuit) => {
     const now = new Date();
     const nowMillis = now.getTime();
@@ -76,8 +76,11 @@ useEffect(()=>{
   const getCommentsForTheTuit= async () =>{
 
     const commentResult= await CommentService.findUsersThatCommentTheTuitByTuidId(tuit._id);
-    setcommentCount(commentResult.length);
-    setComments(commentResult);
+    if(showTuitStat){
+      setcommentCount(commentResult.length);
+      setComments(commentResult);
+    }
+    
   }
   getCommentsForTheTuit();
 
@@ -106,8 +109,7 @@ useEffect(()=>{
         {tuit.tuit}
         {tuit.youtube && <TuitVideo tuit={tuit} />}
         {tuit.image && <TuitImage tuit={tuit} />}
-        
-        <TuitStats
+        {showTuitStat&&<TuitStats
           tuit={tuit}
           currentUser={currentUser}
           likeTuit={likeTuit}
@@ -117,7 +119,8 @@ useEffect(()=>{
           displayComment={displayComment}
           commentCount={commentCount}
           setTuits={setTuits}
-        />
+        />}
+        
       {showCommentSection &&  <div className="card">
    <div className="card-body">
    {comments.map && comments.map((comment,index) => <>
