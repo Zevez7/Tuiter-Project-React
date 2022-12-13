@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
 import Tuits from "../tuits";
-import { Controller, useForm } from "react-hook-form";
 import { Button, TextField, Typography } from "@mui/material";
 import * as authService from "../../services/auth-service";
 import * as tuitService from "../../services/tuits-service";
-import { useNavigate } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
+import Picker from "emoji-picker-react";
+import DatePicker from "react-datepicker";
 const Home = () => {
-  const navigate = useNavigate();
   const [authprofile, setAuthProfile] = useState({});
+  const [showEmojiBox, setShowEmojiBox] = useState(false);
+  const [showDateBox, setShowDateBox] = useState(false);
   const [tuits, setTuits] = useState();
   const [searchParams] = useSearchParams();
+  const [tuitObj, setTuitObj] = useState({ tuit: "" });
+  const [startDate, setStartDate] = useState(new Date());
   let searchQuery = searchParams.get("q");
   useEffect(() => {
     const fetchProfile = async () => {
@@ -53,21 +56,25 @@ const Home = () => {
     fetchAllTuits();
   }, []);
 
-  const { handleSubmit, control, reset } = useForm({
+  /*const { handleSubmit, control, reset, getValues, setValue } = useForm({
     defaultValues: {
       tuit: "",
     },
   });
-
+*/
   const onSubmit = async (data) => {
-    console.log(data);
     const uid = authprofile._id;
 
     const tuitCreated = await tuitService.createTuitByUserId(uid, data);
     console.log(tuitCreated);
     const alltuit = await tuitService.findAllTuits();
     setTuits(alltuit);
-    reset();
+    setTuitObj({ tuit: "" });
+  };
+
+  const onEmojiClick = async (event, emojiObject) => {
+    let emoji = await emojiObject.emoji;
+    setTuitObj({ tuit: tuitObj.tuit + emoji });
   };
 
   return (
@@ -89,40 +96,69 @@ const Home = () => {
                   ? `Logged in as ${authprofile.username}`
                   : `Not logged in`}
               </Typography>
-
-              <Controller
-                name={"tuit"}
-                control={control}
-                render={({ field: { onChange, value } }) => (
-                  <TextField
-                    id="tuit"
-                    fullWidth
-                    label="Type your tuit here"
-                    variant="outlined"
-                    value={value}
-                    onChange={onChange}
-                    multiline
-                    rows={4}
-                    sx={{ mb: 1, border: "none" }}
-                  />
-                )}
+              <TextField
+                id="tuit"
+                fullWidth
+                label="Type your tuit here"
+                variant="outlined"
+                multiline
+                rows={4}
+                value={tuitObj.tuit}
+                sx={{ mb: 1, border: "none" }}
+                onChange={(e) => setTuitObj({ tuit: e.target.value })}
+                // value={tuitObj.tuit}
               />
             </form>
+            {showEmojiBox && <Picker onEmojiClick={onEmojiClick} />}
+            {showDateBox && (
+              <DatePicker
+                selected={startDate}
+                onChange={(date) => setTuitObj({ tuit: tuitObj.tuit + date })}
+                inline
+              />
+            )}
             <div className="row">
               <div className="col-9 ttr-font-size-150pc text-primary">
-                <i className="fas fa-portrait me-3"></i>
-                <i className="far fa-gif me-3"></i>
-                <i className="far fa-bar-chart me-3"></i>
-                <i className="far fa-face-smile me-3"></i>
-                <i className="far fa-calendar me-3"></i>
-                <i className="far fa-map-location me-3"></i>
+                <i
+                  className="far fa-face-smile me-3"
+                  onClick={() => {
+                    setShowEmojiBox(!showEmojiBox);
+                    setShowDateBox(false);
+                  }}
+                ></i>
+                <i
+                  className="far fa-calendar me-3"
+                  onClick={() => {
+                    setShowDateBox(!showDateBox);
+                    setShowEmojiBox(false);
+                  }}
+                ></i>
+                <i
+                  className="far fa-map-location me-3"
+                  onClick={() => {
+                    setShowEmojiBox(false);
+                    setShowDateBox(false);
+                    navigator.geolocation.getCurrentPosition(function (
+                      position
+                    ) {
+                      setTuitObj({
+                        tuit:
+                          tuitObj.tuit +
+                          " latitute: " +
+                          position.coords.latitude +
+                          " longitude: " +
+                          position.coords.longitude,
+                      });
+                    });
+                  }}
+                ></i>
               </div>
               <div className="col-3">
                 <Button
                   size="large"
                   variant="contained"
                   disabled={!authprofile.username}
-                  onClick={handleSubmit(onSubmit)}
+                  onClick={() => onSubmit(tuitObj)}
                 >
                   Tuit
                 </Button>
@@ -131,7 +167,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <Tuits tuits={tuits} />
+      <Tuits tuits={tuits} setTuits={setTuits} />
     </div>
   );
 };

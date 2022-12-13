@@ -5,8 +5,9 @@ import TuitVideo from "./tuit-video";
 import { Avatar } from "@mui/material";
 
 import * as CommentService from '../../services/comment-service';
+import * as TuitService from "../../services/tuits-service";
 
-const Tuit = ({ tuit, likeTuit, bookmarkTuit, currentUser,index, deleteBookmark }) => {
+const Tuit = ({ tuit, likeTuit, bookmarkTuit, currentUser,index, deleteBookmark=()=>{}, setTuits=()=>{}, tuits=[], showTuitStat }) => {
   const daysOld = (tuit) => {
     const now = new Date();
     const nowMillis = now.getTime();
@@ -31,40 +32,55 @@ const Tuit = ({ tuit, likeTuit, bookmarkTuit, currentUser,index, deleteBookmark 
   };
 
   const [showCommentSection,setCommentSection]= useState(false);
-  const [commentCount,setcommentCount]= useState(100);
-  const [commentText,setCommentText]= useState('dummy comment');
-  const [comments,setComments] = useState([{
-    commentedBy: {username: 'dummy username'},
-    commentedTuit: 'dummy tuit',
-    comment: 'dummy text'
-   }]);
+  const [commentCount,setcommentCount]= useState(0);
+  const [commentText,setCommentText]= useState('');
+  const [comments,setComments] = useState([]);
   const displayComment = () =>{
     setCommentSection(!showCommentSection);
   }
 
   const addComment =() =>{
-   const comment={
-    commentedBy: currentUser,
-    commentedTuit: tuit,
-    comment: commentText
-   };
-   setComments((prevComments)=>[comment,...prevComments]);
-    setcommentCount((prevCount)=>prevCount+1);
 
-const saveComment = async ()=> {
-  // const tempComment = {commentedBy: currentUser._id,commentedTuit: tuit._id,comment:commentText };
-  // const commentResult= await CommentService.createComment(tempComment);
-}
- saveComment();
-  }
+    if(commentText === '' || commentText === null){
+      alert('Please add characters to your comment');
+      return;
+    }
+    const comment={
+     commentedBy: currentUser,
+     commentedTuit: tuit,
+     comment: commentText
+    };
+    setComments((prevComments)=>[comment,...prevComments]);
+     setcommentCount((prevCount)=>prevCount+1);
+ 
+ const saveComment = async ()=> {
+   const tempComment = {commentedBy: currentUser._id,commentedTuit: tuit._id,comment:commentText };
+   const commentResult= await CommentService.createComment(tempComment);
+ }
+  saveComment();
+   }
+
+   const deleteTuit = async () =>{
+
+let filteredTuit = tuits.filter(function(tempTuit) {
+  return tempTuit._id!==tuit._id;
+});
+const deleteStatus = await TuitService.deleteTuit(tuit._id);
+
+setTuits(filteredTuit);
+   }
+ 
 
 useEffect(()=>{
 
   const getCommentsForTheTuit= async () =>{
 
     const commentResult= await CommentService.findUsersThatCommentTheTuitByTuidId(tuit._id);
-    setcommentCount(commentResult.length);
-    setComments(commentResult);
+    if(showTuitStat){
+      setcommentCount(commentResult.length);
+      setComments(commentResult);
+    }
+    
   }
   getCommentsForTheTuit();
 
@@ -74,7 +90,7 @@ useEffect(()=>{
   return (
     // <li onClick={() => navigate(`/tuit/${tuit._id}`)}
     <li className="p-2 ttr-tuit list-group-item d-flex rounded-0">
-      <div className="pe-2">
+      <div className="pe-2" >
         {tuit.postedBy && (
           // <img src={`../images/${tuit.postedBy.username}.jpg`}
           //   className="ttr-tuit-avatar-logo rounded-circle" />
@@ -88,11 +104,12 @@ useEffect(()=>{
           {tuit.postedBy && tuit.postedBy.username}@
           {tuit.postedBy && tuit.postedBy.username} -
           <span className="ms-1">{daysOld(tuit)}</span>
+         {JSON.stringify(currentUser)!=='{}'&& tuit.postedBy._id === currentUser._id && <i className="fa fa-trash" aria-hidden="true" style={{float:'right', color: 'red'}} onClick={()=>deleteTuit()}></i>}
         </h2>
         {tuit.tuit}
         {tuit.youtube && <TuitVideo tuit={tuit} />}
         {tuit.image && <TuitImage tuit={tuit} />}
-        <TuitStats
+        {showTuitStat&&<TuitStats
           tuit={tuit}
           currentUser={currentUser}
           likeTuit={likeTuit}
@@ -101,7 +118,9 @@ useEffect(()=>{
           deleteBookmark={deleteBookmark}
           displayComment={displayComment}
           commentCount={commentCount}
-        />
+          setTuits={setTuits}
+        />}
+        
       {showCommentSection &&  <div className="card">
    <div className="card-body">
    {comments.map && comments.map((comment,index) => <>
@@ -112,8 +131,10 @@ useEffect(()=>{
   </div>
   <br />
   </>)}
-    <textarea className="form-control" id="exampleFormControlTextarea1" rows="2" placeholder='Enter your comment' onChange={(e)=>setCommentText(e.target.value)}></textarea>
-    <button type="button" className="btn btn-primary" style={{float:'right'}} onClick={()=>addComment()}>Comment</button>
+  {JSON.stringify(currentUser)!=='{}' && 
+  <><textarea className="form-control" id="exampleFormControlTextarea1" rows="2" placeholder='Enter your comment' onChange={(e)=>setCommentText(e.target.value)}></textarea>
+    <button type="button" className="btn btn-primary" style={{float:'right'}} onClick={()=>addComment()}>Comment</button> 
+    </>}
   </div>
 </div>}
       </div>
