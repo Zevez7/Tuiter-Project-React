@@ -11,7 +11,7 @@ import * as authService from "../../services/auth-service";
  *
  * @param setMyBookmarkedTuits
  * */
-const Tuits = ({ tuits = [], setMyBookmarkedTuits, setTuits=()=>{} }) => {
+const Tuits = ({ tuits = [], setMyBookmarkedTuits= ()=>{}, setTuits=()=>{} }) => {
 
   const [authprofile, setAuthProfile] = useState({});
 
@@ -43,7 +43,7 @@ const Tuits = ({ tuits = [], setMyBookmarkedTuits, setTuits=()=>{} }) => {
     <div>
 
       <ul className="ttr-tuits list-group">
-        {tuits.map && tuits.map((tuit,index) => <Tuit key={tuit._id} tuit={tuit} currentUser={authprofile} index={index} deleteBookmark={deleteBookmark} setTuits={setTuits}/>)}
+        {tuits.map && tuits.map((tuit,index) => <Tuit key={tuit._id} tuit={tuit} currentUser={authprofile} index={index} deleteBookmark={deleteBookmark} setTuits={setTuits} tuits={tuits}/>)}
       </ul>
     </div>
   );
