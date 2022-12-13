@@ -156,7 +156,7 @@ setTuitObj({'tuit':tuitObj.tuit+' latitute: '+position.coords.latitude+' longitu
           </div>
         </div>
       </div>
-      <Tuits tuits={tuits} />
+      <Tuits tuits={tuits} setTuits={setTuits}/>
     </div>
   );
 };
