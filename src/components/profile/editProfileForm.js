@@ -1,12 +1,11 @@
 /**
  * @file Edit profile page
  */
-import { Box, Button, TextField, Typography } from "@mui/material";
-import React, { useEffect, useMemo, useState } from "react";
+import { Box, Button, TextField } from "@mui/material";
+import React, { useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { Controller, useForm } from "react-hook-form";
 import * as serviceProfile from "../../services/profiles-service";
-import * as authService from "../../services/auth-service";
 
 const EdiitProfileForm = ({ profileResp, authprofile }) => {
   const navigate = useNavigate();
